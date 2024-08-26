@@ -1,32 +1,32 @@
 'use strict';
 
-let tt = 1;
+// let tt = 1;
 
-let a = 10,
-    b = 20,
-    c = 30;
-// alert(a+b-2+c);
+// let a = 10,
+//     b = 20,
+//     c = 30;
+// // alert(a+b-2+c);
 
-let d = 5
-// alert(d);
+// let d = 5
+// // alert(d);
 
 
-const COLOR_RED = "#F00";
-const COLOR_GREEN = "#0F0";
-const COLOR_BLUE = "#00F";
-const COLOR_ORANGE = "#FF7F00";
+// const COLOR_RED = "#F00";
+// const COLOR_GREEN = "#0F0";
+// const COLOR_BLUE = "#00F";
+// const COLOR_ORANGE = "#FF7F00";
 
-// 색상을 고르고 싶을 때 별칭을 사용할 수 있게 되었습니다.
-let color = COLOR_ORANGE;
-// alert(color); // #FF7F00
+// // 색상을 고르고 싶을 때 별칭을 사용할 수 있게 되었습니다.
+// let color = COLOR_ORANGE;
+// // alert(color); // #FF7F00
 
-let str = "Hello";
-let str2 = 'Single quotes are ok too';
-let phrase = `can embed another ${str}`;
-let phrase_test = 'can embed another ${str}';
-// alert(phrase); 
+// let str = "Hello";
+// let str2 = 'Single quotes are ok too';
+// let phrase = `can embed another ${str}`;
+// let phrase_test = 'can embed another ${str}';
+// // alert(phrase); 
 
-let notWork = "can embed another ${str}";
+// let notWork = "can embed another ${str}";
 // alert(notWork); 
 
 // alert(typeof notWork);  // string 자료형 반환
@@ -160,6 +160,72 @@ let result = condition ? value1 : value2;
 // for (let _ of arr_test){
 //     alert(_);
 // }
+
+// let a = 3;
+// a=5;
+
+// switch (a) {
+//   case 4:
+//     alert('계산이 맞습니다!');
+//     break;
+
+//   case 3: // (*) 두 case문을 묶음
+//   case 5:
+//     alert('계산이 틀립니다!');
+//     alert("수학 수업을 다시 들어보는걸 권유 드립니다.");
+//     break;
+
+//   default:
+//     alert('계산 결과가 이상하네요.');
+// }
+
+// let browser = "Edge";
+
+// if(browser == 'Edge') {
+//     alert("Edge를 사용하고 계시네요!");
+//   } else if (browser == 'Chrome'
+//    || browser == 'Firefox'
+//    || browser == 'Safari'
+//    || browser == 'Opera') {
+//     alert( '저희 서비스가 지원하는 브라우저를 사용하고 계시네요.' );
+//   } else {
+//     alert( '현재 페이지가 괜찮아 보이길 바랍니다!' );
+//   }
+
+function checkAge(age) {
+    return (age > 18) ? true : confirm('보호자의 동의를 받으셨나요?');
+}
+  
+function checkAge_2(age) {
+    return (age > 18) || confirm('보호자의 동의를 받으셨나요?');
+}
+alert(checkAge(3))
+
+alert('-------------');
+alert(true && confirm('보호자의 동의를 받으셨나요?'));
+alert('-------------');
+
+
+
+function showMessage(from, text = "no text given") {
+    alert( from + ": " + text );
+}
+
+showMessage("Ann"); // Ann: no text given
+showMessage("Ann", '123'); // Ann: no text given
+
+
+
+function showMessage_2(from, text = noTextCond()) {
+    alert( from + ": " + text );
+}
+showMessage_2("Aby");
+
+function noTextCond() {
+    return "no text given <<== from function return";
+}
+
+
 
 
 
