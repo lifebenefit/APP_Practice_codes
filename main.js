@@ -156,10 +156,20 @@ let result = condition ? value1 : value2;
 // }
 // alert('완료!');
 
-// let arr_test = [10,5,77];
+// alert("---------for-------------")
+// // python 에서 fon _ in arr_test: alert(_)
+// let arr_test = [1,2,3,4,5,6];
 // for (let _ of arr_test){
 //     alert(_);
 // }
+
+// // forEach(callbackfn: (value: T, index: number, array: T[]) => void, thisArg?: any): void;
+// let call_arr = function ( value, index, array ) { alert(`${value}  , ${index}  , ${array}`) }
+// arr_test.forEach(call_arr)
+
+// alert("---------for-------------")
+
+
 
 // let a = 3;
 // a=5;
@@ -192,38 +202,161 @@ let result = condition ? value1 : value2;
 //     alert( '현재 페이지가 괜찮아 보이길 바랍니다!' );
 //   }
 
-function checkAge(age) {
-    return (age > 18) ? true : confirm('보호자의 동의를 받으셨나요?');
+// function checkAge(age) {
+//     return (age > 18) ? true : confirm('보호자의 동의를 받으셨나요?');
+// }
+
+// function checkAge_2(age) {
+//     return (age > 18) || confirm('보호자의 동의를 받으셨나요?');
+// }
+// alert(checkAge(3))
+
+// alert('-------------');
+// alert(true && confirm('보호자의 동의를 받으셨나요?'));
+// alert('-------------');
+
+
+
+// function showMessage(from, text = "no text given") {
+//     alert( from + ": " + text );
+// }
+
+// showMessage("Ann"); // Ann: no text given
+// showMessage("Ann", '123'); // Ann: no text given
+
+
+
+// function showMessage_2(from, text = noTextCond()) {
+//     alert( from + ": " + text );
+// }
+// showMessage_2("Aby");
+
+// function noTextCond() {
+//     return "no text given <<== from function return";
+// }
+
+
+
+
+// function say_test(){  // 함수 선언문 : 런타임 전에 메모리에 로딩 됨
+//     alert("testttttttttttt");
+//     return true;
+// }
+
+// // say_test = function(){  // 함수 표현식 : 런타임 시점에서 실행되므로 할당 이후에 함수사용이 가능하다
+// //     alert("testttttttttttt");
+// //     return true;
+// // }
+
+
+// say_test();
+
+// let var_func = say_test;
+
+// alert(var_func);
+
+// alert(say_test);
+
+// alert(var_func());
+
+// // let say_test = 3;
+
+// // alert(say_test);
+
+
+// function ask(question, yes, no) {
+//     if (confirm(question)) yes()
+//     else no();
+//   }
+
+//   function showOk() {
+//     alert( "동의하셨습니다." );
+//   }
+
+//   function showCancel() {
+//     alert( "취소 버튼을 누르셨습니다." );
+//   }
+
+//   // 사용법: 함수 showOk와 showCancel가 ask 함수의 인수로 전달됨
+//   ask("동의하십니까?", showOk, showCancel);
+
+
+
+
+
+/*
+func_1 과 func_2 는 같은 식
+*/
+let func_1 = (arg1, arg2, ...argN) => true
+
+let func_2 = function (arg1, arg2, ...argN) {
+    return true;
+};
+
+alert(func_2());
+
+
+let double = n => n * 2;
+// let double = function(n) { return n * 2 }과 거의 동일합니다.
+
+alert(double(3)); // 6
+
+
+let sayHi = () => alert("hiiiiiiiiiiiii!");
+
+sayHi();
+
+let saytrue = () => true;
+alert(saytrue())
+
+
+
+let age = prompt("나이를 알려주세요.", 18);
+
+let welcome = (age < 18) ?
+    () => alert('안녕') :
+    () => alert("안녕하세요!");
+
+alert(welcome())
+
+
+let ask = (q,yes,no) => (confirm(q)) ? yes() : no()
+
+// ask("동의?", 
+//     function() {alert("동의함")}, 
+//     function() {alert("취소")})
+ask("동의?", 
+    () => {alert("동의함")}, 
+    () => {alert("취소")})
+
+
+
+
+// 화살표(=>) 우측엔 표현식이 있음
+let sum1 = (a, b) => a + b;
+
+// 중괄호{ ... }를 사용하면 본문에 여러 줄의 코드를 작성할 수 있음. return문이 꼭 있어야 함.
+let sum2 = (a, b) => {
+  // ...
+  return a + b;
 }
-  
-function checkAge_2(age) {
-    return (age > 18) || confirm('보호자의 동의를 받으셨나요?');
-}
-alert(checkAge(3))
 
-alert('-------------');
-alert(true && confirm('보호자의 동의를 받으셨나요?'));
-alert('-------------');
+// 인수가 없는 경우
+let sayHi3 = () => alert("Hello");
+
+// 인수가 하나인 경우
+let double4 = n => n * 2;
 
 
 
-function showMessage(from, text = "no text given") {
-    alert( from + ": " + text );
-}
-
-showMessage("Ann"); // Ann: no text given
-showMessage("Ann", '123'); // Ann: no text given
 
 
 
-function showMessage_2(from, text = noTextCond()) {
-    alert( from + ": " + text );
-}
-showMessage_2("Aby");
 
-function noTextCond() {
-    return "no text given <<== from function return";
-}
+
+
+
+
 
 
 
