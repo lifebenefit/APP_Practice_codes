@@ -61,7 +61,8 @@ let objUserData = JSON.parse(strUserData);
 alert(objUserData["name"]);
 alert(objUserData.friends[1]);
 let dataObject = new Date(objUserData.date);
-alert(dataObject);
+alert(dataObject.getTime());
+alert(dataObject.getFullYear());
 alert(JSON.stringify(objUserData, null, 4)); // 보기 좋게 줄바뀜 + 들여쓰기(4공백)
 alert("-------------------")
 /**
