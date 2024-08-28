@@ -358,17 +358,17 @@ func_test_1("func_test_1");
 /*
 함수 표현식(Function Expression)
 */
-let func_test_2 = function (argu) {  // 함수 표현식 : 런타임 시점에서 실행되므로 할당 이후에 함수사용이 가능하다
+let func_test_2 = function (argu) {  // 함수 표현식 : 런타임 시점에서 실행되므로 할당 이후에 메모리 로딩 됨
     alert(`argu : ${argu}`);
     return true;
 };
-func_test_2("func_test_2");
+func_test_2("func_test_2");          // func_test_2 함수 메모리 로딩되는 시점 << !! 중요
 
 /*
 함수 선언 + 화살표 함수
 // (argu) => { alert(`argu : ${argu}`); }  <<이건<< 인라인 함수 개념
 */
-call_func((argu) => { alert(`argu : ${argu}`); })
+call_func((argu) => { alert(`argu : ${argu}`); })  // argu : call_func
 // 보통 이렇게 응용함
 function call_func(callbackfn) {
     callbackfn("call_func");
@@ -380,5 +380,5 @@ function call_func(callbackfn) {
 */
 let func_test_3 = (argu) => { alert(`argu : ${argu}`); return true; };
 func_test_3("func_test_3");
-call_func(func_test_3)
+call_func(func_test_3)  // argu : call_func
 
