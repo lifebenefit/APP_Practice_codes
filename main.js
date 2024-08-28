@@ -27,7 +27,7 @@
 // // alert(phrase); 
 
 // let notWork = "can embed another ${str}";
-// alert(notWork); 
+// alert(notWork);
 
 // alert(typeof notWork);  // string 자료형 반환
 // alert(typeof tt);  // number 자료형 반환
@@ -40,40 +40,40 @@
 
 // let isBoss = confirm("당신이 주인인가요?");
 
-// alert( isBoss ); // 확인 버튼을 눌렀다면 true가 출력됩니다.
+// alert(isBoss); // 확인 버튼을 눌렀다면 true가 출력됩니다.
 
 
 
-// alert( Number("   123   ") ); // 123
-// alert( Number("123z") );      // NaN ("z"를 숫자로 변환하는 데 실패함)
-// alert( Number(true) );        // 1
-// alert( Number(false) );       // 0
+// alert(Number("   123   ")); // 123
+// alert(Number("123z"));      // NaN ("z"를 숫자로 변환하는 데 실패함)
+// alert(Number(true));        // 1
+// alert(Number(false));       // 0
 
 
-// alert( Boolean(1) ); // 숫자 1(true)
-// alert( Boolean(0) ); // 숫자 0(false)
+// alert(Boolean(1)); // 숫자 1(true)
+// alert(Boolean(0)); // 숫자 0(false)
 
-// alert( Boolean("hello") ); // 문자열(true)
-// alert( Boolean("") ); // 빈 문자열(false)
+// alert(Boolean("hello")); // 문자열(true)
+// alert(Boolean("")); // 빈 문자열(false)
 
 
-// alert( 0 === false ); // false, 피연산자의 형이 다르기 때문입니다.
-// alert( 0 == false ); // True
+// alert(0 === false); // false, 피연산자의 형이 다르기 때문입니다.
+// alert(0 == false); // True
 
 
 // let accessAllowed;
 // let age = prompt('나이를 입력해 주세요.', '');
 
 // if (age > 18) {
-//   accessAllowed = true;
+//     accessAllowed = true;
 // } else {
-//   accessAllowed = false;
+//     accessAllowed = false;
 // }
 // alert(accessAllowed);
 
-/* 3항 연산자
-let result = condition ? value1 : value2;
- */
+// /* 3항 연산자
+// let result = condition ? value1 : value2;
+//  */
 
 // let age = 20;
 // let accessAllowed = (age > 18) ? true : false;
@@ -100,7 +100,7 @@ let result = condition ? value1 : value2;
 // // null이나 undefined가 아닌 첫 번째 피연산자
 // alert(firstName ?? lastName ?? nickName ?? "익명의 사용자"); // 바이올렛
 
-// alert("익명의 사용자" ?? firstName ?? lastName ?? nickName ); // "익명의 사용자"
+// alert("익명의 사용자" ?? firstName ?? lastName ?? nickName); // "익명의 사용자"
 
 // let height;
 // height = height ?? 100;   // height가 null도 아니고 undefined도 아니면 height
@@ -108,11 +108,11 @@ let result = condition ? value1 : value2;
 
 // let i = 6;
 // while (i) { // i가 0이 되면 조건이 falsy가 되므로 반복문이 멈춥니다.
-//     if (i % 2 == 0){
+//     if (i % 2 == 0) {
 //         alert(`짝수 이므로 호출취소 ${i}`);
 //     }
-//     else{
-//         alert( i );
+//     else {
+//         alert(i);
 //     }
 //     i--;
 
@@ -126,9 +126,9 @@ let result = condition ? value1 : value2;
 //     alert(i);
 // }
 
-// i=0;
+// i = 0;
 // for (; i < 3; i++) { // 'begin'이 필요하지 않기 때문에 생략하였습니다.
-//     alert( i )
+//     alert(i)
 // }
 
 // alert("--------------");
@@ -158,13 +158,13 @@ let result = condition ? value1 : value2;
 
 // alert("---------for-------------")
 // // python 에서 fon _ in arr_test: alert(_)
-// let arr_test = [1,2,3,4,5,6];
-// for (let _ of arr_test){
+// let arr_test = [1, 2, 3, 4, 5, 6];
+// for (let _ of arr_test) {
 //     alert(_);
 // }
 
 // // forEach(callbackfn: (value: T, index: number, array: T[]) => void, thisArg?: any): void;
-// let call_arr = function ( value, index, array ) { alert(`${value}  , ${index}  , ${array}`) }
+// let call_arr = function (value, index, array) { alert(`${value}  , ${index}  , ${array}`) }
 // arr_test.forEach(call_arr)
 
 // alert("---------for-------------")
@@ -172,35 +172,35 @@ let result = condition ? value1 : value2;
 
 
 // let a = 3;
-// a=5;
+// a = 5;
 
 // switch (a) {
-//   case 4:
-//     alert('계산이 맞습니다!');
-//     break;
+//     case 4:
+//         alert('계산이 맞습니다!');
+//         break;
 
-//   case 3: // (*) 두 case문을 묶음
-//   case 5:
-//     alert('계산이 틀립니다!');
-//     alert("수학 수업을 다시 들어보는걸 권유 드립니다.");
-//     break;
+//     case 3: // (*) 두 case문을 묶음
+//     case 5:
+//         alert('계산이 틀립니다!');
+//         alert("수학 수업을 다시 들어보는걸 권유 드립니다.");
+//         break;
 
-//   default:
-//     alert('계산 결과가 이상하네요.');
+//     default:
+//         alert('계산 결과가 이상하네요.');
 // }
 
 // let browser = "Edge";
 
-// if(browser == 'Edge') {
+// if (browser == 'Edge') {
 //     alert("Edge를 사용하고 계시네요!");
-//   } else if (browser == 'Chrome'
-//    || browser == 'Firefox'
-//    || browser == 'Safari'
-//    || browser == 'Opera') {
-//     alert( '저희 서비스가 지원하는 브라우저를 사용하고 계시네요.' );
-//   } else {
-//     alert( '현재 페이지가 괜찮아 보이길 바랍니다!' );
-//   }
+// } else if (browser == 'Chrome'
+//     || browser == 'Firefox'
+//     || browser == 'Safari'
+//     || browser == 'Opera') {
+//     alert('저희 서비스가 지원하는 브라우저를 사용하고 계시네요.');
+// } else {
+//     alert('현재 페이지가 괜찮아 보이길 바랍니다!');
+// }
 
 // function checkAge(age) {
 //     return (age > 18) ? true : confirm('보호자의 동의를 받으셨나요?');
@@ -218,7 +218,7 @@ let result = condition ? value1 : value2;
 
 
 // function showMessage(from, text = "no text given") {
-//     alert( from + ": " + text );
+//     alert(from + ": " + text);
 // }
 
 // showMessage("Ann"); // Ann: no text given
@@ -227,7 +227,7 @@ let result = condition ? value1 : value2;
 
 
 // function showMessage_2(from, text = noTextCond()) {
-//     alert( from + ": " + text );
+//     alert(from + ": " + text);
 // }
 // showMessage_2("Aby");
 
@@ -238,15 +238,15 @@ let result = condition ? value1 : value2;
 
 
 
-// function say_test(){  // 함수 선언문 : 런타임 전에 메모리에 로딩 됨
+// function say_test() {  // 함수 선언문 : 런타임 전에 메모리에 로딩 됨
 //     alert("testttttttttttt");
 //     return true;
 // }
 
-// // say_test = function(){  // 함수 표현식 : 런타임 시점에서 실행되므로 할당 이후에 함수사용이 가능하다
-// //     alert("testttttttttttt");
-// //     return true;
-// // }
+// say_test = function () {  // 함수 표현식 : 런타임 시점에서 실행되므로 할당 이후에 함수사용이 가능하다
+//     alert("testttttttttttt");
+//     return true;
+// }
 
 
 // say_test();
@@ -267,111 +267,118 @@ let result = condition ? value1 : value2;
 // function ask(question, yes, no) {
 //     if (confirm(question)) yes()
 //     else no();
-//   }
+// }
 
-//   function showOk() {
-//     alert( "동의하셨습니다." );
-//   }
+// function showOk() {
+//     alert("동의하셨습니다.");
+// }
 
-//   function showCancel() {
-//     alert( "취소 버튼을 누르셨습니다." );
-//   }
+// function showCancel() {
+//     alert("취소 버튼을 누르셨습니다.");
+// }
 
-//   // 사용법: 함수 showOk와 showCancel가 ask 함수의 인수로 전달됨
-//   ask("동의하십니까?", showOk, showCancel);
+// // 사용법: 함수 showOk와 showCancel가 ask 함수의 인수로 전달됨
+// ask("동의하십니까?", showOk, showCancel);
+
+
+// /*
+// func_1 과 func_2 는 같은 식
+// */
+// let func_1 = (arg1, arg2, ...argN) => true
+
+// let func_2 = function (arg1, arg2, ...argN) {
+//     return true;
+// };
+
+// alert(func_2());
+
+
+// let double = n => n * 2;
+// // let double = function(n) { return n * 2 }과 거의 동일합니다.
+
+// alert(double(3)); // 6
+
+
+// let sayHi = () => alert("hiiiiiiiiiiiii!");
+
+// sayHi();
+
+// let saytrue = () => true;
+// alert(saytrue())
 
 
 
+// let age = prompt("나이를 알려주세요.", 18);
+
+// let welcome = (age < 18) ?
+//     () => alert('안녕') :
+//     () => alert("안녕하세요!");
+
+// alert(welcome())
+
+
+// let ask = (q, yes, no) => (confirm(q)) ? yes() : no()
+
+// // ask("동의?", 
+// //     function() {alert("동의함")}, 
+// //     function() {alert("취소")})
+// ask("동의?",
+//     () => { alert("동의함") },
+//     () => { alert("취소") })
+
+
+
+
+// // 화살표(=>) 우측엔 표현식이 있음
+// let sum1 = (a, b) => a + b;
+
+// // 중괄호{ ... }를 사용하면 본문에 여러 줄의 코드를 작성할 수 있음. return문이 꼭 있어야 함.
+// let sum2 = (a, b) => {
+//     // ...
+//     return a + b;
+// }
+
+// // 인수가 없는 경우
+// let sayHi3 = () => alert("Hello");
+
+// // 인수가 하나인 경우
+// let double4 = n => n * 2;
+
+
+
+/* 
+함수 선언(Function Declaration)
+*/
+function func_test_1(argu) {  // 함수 선언 : 런타임 전에 메모리에 로딩 됨
+    alert(`argu : ${argu}`);
+    return true;
+}
+func_test_1("func_test_1");
+
+/*
+함수 표현식(Function Expression)
+*/
+let func_test_2 = function (argu) {  // 함수 표현식 : 런타임 시점에서 실행되므로 할당 이후에 함수사용이 가능하다
+    alert(`argu : ${argu}`);
+    return true;
+};
+func_test_2("func_test_2");
+
+/*
+함수 선언 + 화살표 함수
+// (argu) => { alert(`argu : ${argu}`); }  <<이건<< 인라인 함수 개념
+*/
+call_func((argu) => { alert(`argu : ${argu}`); })
+// 보통 이렇게 응용함
+function call_func(callbackfn) {
+    callbackfn("call_func");
+}
 
 
 /*
-func_1 과 func_2 는 같은 식
+함수 표현식 + 화살표 함수
 */
-let func_1 = (arg1, arg2, ...argN) => true
-
-let func_2 = function (arg1, arg2, ...argN) {
-    return true;
-};
-
-alert(func_2());
-
-
-let double = n => n * 2;
-// let double = function(n) { return n * 2 }과 거의 동일합니다.
-
-alert(double(3)); // 6
-
-
-let sayHi = () => alert("hiiiiiiiiiiiii!");
-
-sayHi();
-
-let saytrue = () => true;
-alert(saytrue())
-
-
-
-let age = prompt("나이를 알려주세요.", 18);
-
-let welcome = (age < 18) ?
-    () => alert('안녕') :
-    () => alert("안녕하세요!");
-
-alert(welcome())
-
-
-let ask = (q,yes,no) => (confirm(q)) ? yes() : no()
-
-// ask("동의?", 
-//     function() {alert("동의함")}, 
-//     function() {alert("취소")})
-ask("동의?", 
-    () => {alert("동의함")}, 
-    () => {alert("취소")})
-
-
-
-
-// 화살표(=>) 우측엔 표현식이 있음
-let sum1 = (a, b) => a + b;
-
-// 중괄호{ ... }를 사용하면 본문에 여러 줄의 코드를 작성할 수 있음. return문이 꼭 있어야 함.
-let sum2 = (a, b) => {
-  // ...
-  return a + b;
-}
-
-// 인수가 없는 경우
-let sayHi3 = () => alert("Hello");
-
-// 인수가 하나인 경우
-let double4 = n => n * 2;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+let func_test_3 = (argu) => { alert(`argu : ${argu}`); return true; };
+func_test_3("func_test_3");
+call_func(func_test_3)
 
