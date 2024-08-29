@@ -1,17 +1,17 @@
-// 'use strict';
+'use strict';
 
-let user = {     // 객체
-    name: "John",  // 키: "name",  값: "John"
-    age: 30,        // 키: "age", 값: 30
-    test: "test_k",
-    "99": true
-};
+// let user = {     // 객체
+//     name: "John",  // 키: "name",  값: "John"
+//     age: 30,        // 키: "age", 값: 30
+//     test: "test_k",
+//     "99": true
+// };
 
 // let clone_user1 = {};
 // let clone_user2 = Object();
 // let clone_user3 = Object();
 // // let clone_user = 
-clone_user1 = user;                     // 얕은 복사
+// clone_user1 = user;                     // 얕은 복사
 // alert(clone_user1 === user);        // 얕은 복사이므로 true
 
 // Object.assign(clone_user2, user);   // 깊은 복사
@@ -43,31 +43,31 @@ clone_user1 = user;                     // 얕은 복사
 // alert(Object.entries(user));
 // alert("-------------------")
 
-/**
- * Dictionary -to-> JSON =====================================================================================
- */
-alert(JSON.stringify(clone_user1));
-alert(JSON.stringify(clone_user1, null, 4)); // 보기 좋게 줄바뀜 + 들여쓰기(4공백)
-alert(JSON.stringify(clone_user1, ['name', 'age']));
-alert("-------------------")
-/**
- * JSON -to-> Dictionary
- */
-let strUserData = '{ "name": "John", \
-                    "age": 35, "isAdmin": false, \
-                    "date":"2017-11-30T12:00:00.000Z", \
-                    "friends": [0,1,2,3] }';
-let objUserData = JSON.parse(strUserData);
-alert(objUserData["name"]);
-alert(objUserData.friends[1]);
-let dataObject = new Date(objUserData.date);
-alert(dataObject.getTime());
-alert(dataObject.getFullYear());
-alert(JSON.stringify(objUserData, null, 4)); // 보기 좋게 줄바뀜 + 들여쓰기(4공백)
-alert("-------------------")
-/**
- * ============================================================================================================
- */
+// /**
+//  * Dictionary -to-> JSON =====================================================================================
+//  */
+// alert(JSON.stringify(clone_user1));
+// alert(JSON.stringify(clone_user1, null, 4)); // 보기 좋게 줄바뀜 + 들여쓰기(4공백)
+// alert(JSON.stringify(clone_user1, ['name', 'age']));
+// alert("-------------------")
+// /**
+//  * JSON -to-> Dictionary
+//  */
+// let strUserData = '{ "name": "John", \
+//                     "age": 35, "isAdmin": false, \
+//                     "date":"2017-11-30T12:00:00.000Z", \
+//                     "friends": [0,1,2,3] }';
+// let objUserData = JSON.parse(strUserData);
+// alert(objUserData["name"]);
+// alert(objUserData.friends[1]);
+// let dataObject = new Date(objUserData.date);
+// alert(dataObject.getTime());
+// alert(dataObject.getFullYear());
+// alert(JSON.stringify(objUserData, null, 4)); // 보기 좋게 줄바뀜 + 들여쓰기(4공백)
+// alert("-------------------")
+// /**
+//  * ============================================================================================================
+//  */
 
 // alert(show_all_dict(clone_user2));
 // alert("-------------------")
@@ -343,4 +343,85 @@ sort, reverse, splice는 기존 배열을 변형시킨다는 점에 주의하시
 // let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
 
 // alert(ms); // 1327611110417  (타임스탬프)
+
+/**
+ * 자료 구조
+ */
+// 링크드 리스트 // 연결 리스트
+let linked_list_1 = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: {
+                value: 4,
+                next: null
+            }
+        }
+    }
+};
+
+let linked_list_2 = { value: 1 };
+linked_list_2.next = { value: 2 };
+linked_list_2.next.next = { value: 3 };
+linked_list_2.next.next.next = { value: 4 };
+linked_list_2.next.next.next.next = null;
+
+let i = 0;
+let current = linked_list_1;
+while (current !== null) {
+    console.log(`${i + 1} : ${current.value}`);
+    current = current.next;
+    i++;
+}
+
+
+// 기변 인자
+function sumAll(x, y = null, ...rest) { // ...이 가변인자 rest가 배열의 이름
+    if (args != "") {
+        console.log(`추가로 온 인 수들 ${typeof (args)} > ${args}`)
+        console.log(`추가로 온 인 수들 ${Object.prototype.toString.call(args)} > ${args}`)
+        console.log(args[3])
+    }
+    if (y === null) {
+        return x
+    } else {
+        return x + y
+    }
+    // return x+y
+    // let sum = 0;
+
+    // for (let arg of args) sum += arg;
+
+    // return sum;
+}
+
+alert(sumAll(1)); // 1
+alert(sumAll(1, 2)); // 3
+alert(sumAll(1, 2, 3)); // 6
+alert(sumAll(1, 2, 3, 4, 5, 6)); // 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
