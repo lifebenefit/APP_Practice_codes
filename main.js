@@ -344,78 +344,210 @@ sort, reverse, splice는 기존 배열을 변형시킨다는 점에 주의하시
 
 // alert(ms); // 1327611110417  (타임스탬프)
 
+
+// /**
+//  * 자료 구조
+//  */
+// // 링크드 리스트 // 연결 리스트
+// let linked_list_1 = {
+//     value: 1,
+//     next: {
+//         value: 2,
+//         next: {
+//             value: 3,
+//             next: {
+//                 value: 4,
+//                 next: null
+//             }
+//         }
+//     }
+// };
+
+// let linked_list_2 = { value: 1 };
+// linked_list_2.next = { value: 2 };
+// linked_list_2.next.next = { value: 3 };
+// linked_list_2.next.next.next = { value: 4 };
+// linked_list_2.next.next.next.next = null;
+
+// let i = 0;
+// let current = linked_list_1;
+// while (current !== null) {
+//     console.log(`${i + 1} : ${current.value}`);
+//     current = current.next;
+//     i++;
+// }
+
+
+// // 기변 인자
+// function sumAll(x, y = null, ...rest) { // ...이 가변인자 rest가 배열의 이름
+//     if (rest != "") {
+//         console.log(`추가로 온 인 수들 ${typeof (rest)} > ${rest}`)
+//         console.log(`추가로 온 인 수들 ${Object.prototype.toString.call(rest)} > ${rest}`)
+//         console.log(rest[3])
+//     }
+//     if (y === null) {
+//         return x
+//     } else {
+//         return x + y
+//     }
+//     // return x+y
+//     // let sum = 0;
+
+//     // for (let arg of args) sum += arg;
+
+//     // return sum;
+// }
+
+// alert(sumAll(1)); // 1
+// alert(sumAll(1, 2)); // 3
+// alert(sumAll(1, 2, 3)); // 6
+// alert(sumAll(1, 2, 3, 4, 5, 6)); // 
+
+
+// function declarationSayHi(a, b, c, ...rest) {
+//     let name = "memberValue";
+//     name: "name";
+//     alert("Hi");
+// }
+
+// alert(declarationSayHi.name); // declarationSayHi
+// alert(declarationSayHi.length);
+
+
+// let expressionSayHi = function (...rest) {
+//     let name = "memberValue";
+//     name: "name";
+//     alert("Hi");
+//     expressionSayHi.classValueCount++;
+// };
+
+// alert(expressionSayHi.name); // expressionSayHi (익명 함수이지만 이름이 있네요!)
+// alert(expressionSayHi.length);
+
+// expressionSayHi.classValueCount = 0;
+// alert( `호출 횟수: ${expressionSayHi.classValueCount}회` ); // 호출 횟수: 2회
+// expressionSayHi();
+// expressionSayHi();
+// alert( `호출 횟수: ${expressionSayHi.classValueCount}회` ); // 호출 횟수: 2회
+
+
+// /**
+//  * let func = new Function ([arg1, arg2, ...argN], functionBody);
+//  * 함수를 인자로 넘겨 동적으로 생성하는 함수
+//  * 런타임중 함수를 생성해 써야 하는 경우 [ 원격지의 코드를 건들지 않고 통신으로 함수 생성 가능 ]
+//  * 서버 --"함수1"(FastAPI)--> 앱 [ 함수1() ]
+//  */
+// let sum = new Function('a', 'b', 'return a + b');
+
+// alert(sum(1, 2)); // 3
+
+// let sayHi = new Function('alert("Hello")');
+
+// sayHi(); // Hello
+
+
+// // 예약 호출
+// function sayHi1() {
+//     alert('안녕하세요.');
+// }
+
+// setTimeout(sayHi1, 1000);
+// alert('------------.');
+// function sayHi2(who, phrase) {
+//     alert(who + ' 님, ' + phrase);
+// }
+
+// setTimeout(sayHi2, 1000, "홍길동", "안녕하세요."); // 홍길동 님, 안녕하세요.
+
+// setTimeout(() => alert('안녕하세요.'), 1000);
+
+// // 2초 간격으로 메시지를 보여줌
+// let timerId = setInterval(() => alert('째깍'), 2000);
+
+// // 5초 후에 정지
+// setTimeout(() => { clearInterval(timerId); alert('정지'); }, 5000);
+// alert('------------.');
+
+
+// setTimeout(() => alert("World"));
+
+// alert("Hello");
+
+// let user = {
+//     firstName: "John"
+// };
+
+// function func(phrase) {
+//     alert(phrase + ', ' + this.firstName);
+// }
+
+// // this를 user로 바인딩합니다.
+// let funcUser = func.bind(user);
+
+// funcUser("Hello"); // Hello, John (인수 "Hello"가 넘겨지고 this는 user로 고정됩니다.)
+
 /**
- * 자료 구조
+ * getter
+ * setter
+ * 이용 << JS 의 경우 Object의 프로퍼티들의 컨텍스트가 의도치 않게 동작 할 수 있다.
+ * getter setter 함수를 이용해서 this문법의 환경컨텍스트를 고정시키자
  */
-// 링크드 리스트 // 연결 리스트
-let linked_list_1 = {
-    value: 1,
-    next: {
-        value: 2,
-        next: {
-            value: 3,
-            next: {
-                value: 4,
-                next: null
-            }
-        }
+let userGet = {
+    name: "John",
+    surname: "Smith",
+
+    get fullName() {
+        return `${this.name} ${this.surname}`;
     }
 };
 
-let linked_list_2 = { value: 1 };
-linked_list_2.next = { value: 2 };
-linked_list_2.next.next = { value: 3 };
-linked_list_2.next.next.next = { value: 4 };
-linked_list_2.next.next.next.next = null;
+alert(userGet.fullName);  // John Smith
+let contextTest = userGet;
+alert(contextTest.fullName);  // John Smith
 
-let i = 0;
-let current = linked_list_1;
-while (current !== null) {
-    console.log(`${i + 1} : ${current.value}`);
-    current = current.next;
-    i++;
-}
+let userGetSet = {
+    name: "John",
+    surname: "Smith",
 
+    get fullName() {
+        return `${this.name} ${this.surname}`;
+    },
 
-// 기변 인자
-function sumAll(x, y = null, ...rest) { // ...이 가변인자 rest가 배열의 이름
-    if (args != "") {
-        console.log(`추가로 온 인 수들 ${typeof (args)} > ${args}`)
-        console.log(`추가로 온 인 수들 ${Object.prototype.toString.call(args)} > ${args}`)
-        console.log(args[3])
+    set fullName(value) {
+        [this.name, this.surname] = value.split(",");
     }
-    if (y === null) {
-        return x
-    } else {
-        return x + y
+};
+
+alert(userGetSet.fullName);  // John Smith
+// 주어진 값을 사용해 set fullName이 실행됩니다.
+userGetSet.fullName = "Alice,Cooper";
+
+alert(userGetSet.fullName);  // Alice,Cooper
+
+alert(userGetSet.name); // Alice
+alert(userGetSet.surname); // Cooper
+
+
+let user = {
+    get name() {
+        return this._name;
+    },
+
+    set name(value) {
+        if (value.length < 4) {
+            alert("입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.");
+            return;
+        }
+        this._name = value;
     }
-    // return x+y
-    // let sum = 0;
+};
 
-    // for (let arg of args) sum += arg;
+user.name = "Pete";
+alert(user.name);   // Pete
+let tmp = user;
+alert(tmp.name);    // Pete
 
-    // return sum;
-}
-
-alert(sumAll(1)); // 1
-alert(sumAll(1, 2)); // 3
-alert(sumAll(1, 2, 3)); // 6
-alert(sumAll(1, 2, 3, 4, 5, 6)); // 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+user.name = ""; // 입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.
 
 
 
