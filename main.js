@@ -486,70 +486,85 @@ sort, reverse, splice는 기존 배열을 변형시킨다는 점에 주의하시
 
 // funcUser("Hello"); // Hello, John (인수 "Hello"가 넘겨지고 this는 user로 고정됩니다.)
 
-/**
- * getter
- * setter
- * 이용 << JS 의 경우 Object의 프로퍼티들의 컨텍스트가 의도치 않게 동작 할 수 있다.
- * getter setter 함수를 이용해서 this문법의 환경컨텍스트를 고정시키자
- */
-let userGet = {
-    name: "John",
-    surname: "Smith",
+// /**
+//  * getter
+//  * setter
+//  * 이용 << JS 의 경우 Object의 프로퍼티들의 컨텍스트가 의도치 않게 동작 할 수 있다.
+//  * getter setter 함수를 이용해서 this문법의 환경컨텍스트를 고정시키자
+//  */
+// let userGet = {
+//     name: "John",
+//     surname: "Smith",
 
-    get fullName() {
-        return `${this.name} ${this.surname}`;
+//     get fullName() {
+//         return `${this.name} ${this.surname}`;
+//     }
+// };
+
+// alert(userGet.fullName);  // John Smith
+// let contextTest = userGet;
+// alert(contextTest.fullName);  // John Smith
+
+// let userGetSet = {
+//     name: "John",
+//     surname: "Smith",
+
+//     get fullName() {
+//         return `${this.name} ${this.surname}`;
+//     },
+
+//     set fullName(value) {
+//         [this.name, this.surname] = value.split(",");
+//     }
+// };
+
+// alert(userGetSet.fullName);  // John Smith
+// // 주어진 값을 사용해 set fullName이 실행됩니다.
+// userGetSet.fullName = "Alice,Cooper";
+
+// alert(userGetSet.fullName);  // Alice,Cooper
+
+// alert(userGetSet.name); // Alice
+// alert(userGetSet.surname); // Cooper
+
+
+// let user = {
+//     get name() {
+//         return this._name;
+//     },
+
+//     set name(value) {
+//         if (value.length < 4) {
+//             alert("입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.");
+//             return;
+//         }
+//         this._name = value;
+//     }
+// };
+
+// user.name = "Pete";
+// alert(user.name);   // Pete
+// let tmp = user;
+// alert(tmp.name);    // Pete
+
+// user.name = ""; // 입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.
+
+
+
+let animal = {
+    eats: true,
+    walk() {
+        alert("동물이 걷습니다.");
     }
 };
 
-alert(userGet.fullName);  // John Smith
-let contextTest = userGet;
-alert(contextTest.fullName);  // John Smith
-
-let userGetSet = {
-    name: "John",
-    surname: "Smith",
-
-    get fullName() {
-        return `${this.name} ${this.surname}`;
-    },
-
-    set fullName(value) {
-        [this.name, this.surname] = value.split(",");
-    }
+let rabbit = {
+    jumps: true,
+    __proto__: animal
 };
 
-alert(userGetSet.fullName);  // John Smith
-// 주어진 값을 사용해 set fullName이 실행됩니다.
-userGetSet.fullName = "Alice,Cooper";
-
-alert(userGetSet.fullName);  // Alice,Cooper
-
-alert(userGetSet.name); // Alice
-alert(userGetSet.surname); // Cooper
-
-
-let user = {
-    get name() {
-        return this._name;
-    },
-
-    set name(value) {
-        if (value.length < 4) {
-            alert("입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.");
-            return;
-        }
-        this._name = value;
-    }
-};
-
-user.name = "Pete";
-alert(user.name);   // Pete
-let tmp = user;
-alert(tmp.name);    // Pete
-
-user.name = ""; // 입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.
-
-
+// 메서드 walk는 rabbit의 프로토타입인 animal에서 상속받았습니다.
+rabbit.walk(); // 동물이 걷습니다.
 
 
 
