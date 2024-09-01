@@ -71,13 +71,13 @@
 // }
 // alert(accessAllowed);
 
-// /* 3항 연산자
-// let result = condition ? value1 : value2;
-//  */
+/* 3항 연산자
+let result = condition ? value1 : value2;
+ */
 
-// let age = 20;
-// let accessAllowed = (age > 18) ? true : false;
-// alert(accessAllowed);
+let age = 20;
+let accessAllowed = (age > 18) ? true : false;
+alert(accessAllowed);
 
 // (age > 30) ? alert(30) : alert(0);
 
@@ -90,8 +90,6 @@
 // let lastName = null;
 // let nickName = "바이올렛";
 
-
-
 // /*
 // nullish 병합 연산자 ??를 사용하면 피연산자 중 ‘값이 할당된’ 변수를 빠르게 찾을 수 있습니다.
 // ??는 변수에 기본값을 할당하는 용도로 사용할 수 있습니다.
@@ -99,12 +97,11 @@
 
 // // null이나 undefined가 아닌 첫 번째 피연산자
 // alert(firstName ?? lastName ?? nickName ?? "익명의 사용자"); // 바이올렛
-
 // alert("익명의 사용자" ?? firstName ?? lastName ?? nickName); // "익명의 사용자"
 
 // let height;
 // height = height ?? 100;   // height가 null도 아니고 undefined도 아니면 height
-// alert(height);
+// alert(height); // 100
 
 // let i = 6;
 // while (i) { // i가 0이 되면 조건이 falsy가 되므로 반복문이 멈춥니다.
