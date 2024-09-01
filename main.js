@@ -438,25 +438,18 @@ sort, reverse, splice는 기존 배열을 변형시킨다는 점에 주의하시
 //  * 서버 --"함수1"(FastAPI)--> 앱 [ 함수1() ]
 //  */
 // let sum = new Function('a', 'b', 'return a + b');
-
 // alert(sum(1, 2)); // 3
-
-// let sayHi = new Function('alert("Hello")');
-
-// sayHi(); // Hello
-
 
 // // 예약 호출
 // function sayHi1() {
 //     alert('안녕하세요.');
 // }
-
 // setTimeout(sayHi1, 1000);
+
 // alert('------------.');
 // function sayHi2(who, phrase) {
 //     alert(who + ' 님, ' + phrase);
 // }
-
 // setTimeout(sayHi2, 1000, "홍길동", "안녕하세요."); // 홍길동 님, 안녕하세요.
 
 // setTimeout(() => alert('안녕하세요.'), 1000);
@@ -549,80 +542,76 @@ sort, reverse, splice는 기존 배열을 변형시킨다는 점에 주의하시
 
 // user.name = ""; // 입력하신 값이 너무 짧습니다. 네 글자 이상으로 구성된 이름을 입력하세요.
 
-
-// // __proto__ 와 prototype 
-// /**
-//  * 1. __proto__ 는 클래스, 함수, Object 전부 가지고 있는 프로퍼티이다.
-//  * 2. __proto__ 는 상속받는 부모를 가리킨다.
-//  * 3. prototype 은 함수(생성자함수든 일반 함수든)와 클래스 만 가지고 있는 프로퍼티이다.
-//  * 4. prototype 은 함수와 클래스로 생성된 객체들이 공유하는 공간이며 고유한 공간이다.
-//  *     ex) [ a = new Animal() ... b = new Animal() << a 와 b 는 같은 prototype 프로퍼티를 가리킨다 ]
-//  * 5. class Dog extend Animal {~~}; let myDog = new Dog("jully"); 의 경우,
-//  *     -> myDog의 __proto__는 Dog의 prototype, Dog(myDog.__proto__)의 __proto__는 Animal의 prototype 이다.
-//  */
-// let animal = {
-//     eats: true,
-//     walk() {
-//         alert("동물이 걷습니다.");
-//     }
-// };
-
-// let tmp_type = "check this type"
-// alert(Object.prototype.toString.call(tmp_type));
-// alert(animal.__proto__);
-
-// let rabbit = {
-//     jumps: true,
-//     __proto__: animal
-// };
-
-// alert(rabbit.__proto__);
-
-// // 메서드 walk는 rabbit의 프로토타입인 animal에서 상속받았습니다.
-// rabbit.walk(); // 동물이 걷습니다.
-
-// let animal2 = {
-//     eats: true
-// };
-
-
 // /**
 //  * 생성자 함수
 //  * 생성자 함수(constructor function)와 일반 함수에 기술적인 차이는 없습니다. 다만 생성자 함수는 아래 두 관례를 따릅니다.
 //  * 1. 함수 이름의 첫 글자는 대문자로 시작합니다.
 //  * 2. 반드시 'new' 연산자를 붙여 실행합니다.
 //  */
-// function Rabbit2(name) {
+// function Person(name) {
 //     this.name = name;
+//     this.breath = true;
 // }
-// alert(Rabbit2.__proto__);
-// alert(Rabbit2.prototype);
-// Rabbit2.prototype = animal2;
+// let personLiam = new Person("liam");
 
-// let rabbit2 = new Rabbit2("흰 토끼"); //  rabbit2.__proto__ == animal
-// alert(rabbit2.__proto__);
-// alert(rabbit2.prototype);
+// __proto__ 와 prototype 
+/**
+ * 1. __proto__ 는 클래스, 함수, Object 전부 가지고 있는 프로퍼티이다.
+ * 2. __proto__ 는 상속받는 부모를 가리킨다.
+ * 3. prototype 은 함수(생성자함수든 일반 함수든)와 클래스 만 가지고 있는 프로퍼티이다.
+ * 4. prototype 은 함수와 클래스로 생성된 객체들이 공유하는 공간이며 고유한 공간이다.
+ *     ex) [ a = new Animal() ... b = new Animal() << a 와 b 는 같은 prototype 프로퍼티를 가리킨다 ]
+ * 5. class Dog extend Animal {~~}; let myDog = new Dog("jully"); 의 경우,
+ *     -> myDog의 __proto__는 Dog의 prototype, Dog(myDog.__proto__)의 __proto__는 Animal의 prototype 이다.
+ */
+let animal = {
+    eats: true,
+    walk() {
+        alert("동물이 걷습니다.");
+    }
+};
 
-// alert(rabbit2.eats); // true
+let tmp_type = "check this type"
+alert(Object.prototype.toString.call(tmp_type));
+
+let rabbit = {
+    jumps: true,
+    __proto__: animal
+};
+
+// 메서드 walk는 rabbit의 프로토타입인 animal에서 상속받았습니다.
+rabbit.walk(); // 동물이 걷습니다.
+
+let animal2 = {
+    eats: true
+};
+
+function Rabbit2(name) {
+    this.name = name;
+}
+Rabbit2.prototype = animal2;
+
+let rabbit2 = new Rabbit2("흰 토끼"); //  rabbit2.__proto__ == animal
+alert(rabbit2.eats); // true
 
 
 
-// class Animal {
-//     constructor(name) {
-//         this.name = name;
-//     }
-// }
+class Animal {
+    constructor(name) {
+        this.name = name;
+    }
+}
 
-// class Dog extends Animal {
-//     constructor(name, breed) {
-//         super(name);
-//         this.breed = breed;
-//     }
-// }
+class Dog extends Animal {
+    constructor(name, breed) {
+        super(name);
+        this.breed = breed;
+    }
+}
 
-// const myDog = new Dog('Buddy', 'Golden Retriever');
-// console.log(myDog.__proto__ === Dog.prototype); // true
-// console.log(myDog.__proto__.__proto__ === Animal.prototype); // true
+const myDog = new Dog('Buddy', 'Golden Retriever');
+console.log(myDog.__proto__ === Dog.prototype); // true
+console.log(myDog.__proto__.__proto__ === Animal.prototype); // true
 
 
 let arr = [1, 2, 3];
