@@ -27,16 +27,16 @@
 // new User1().sayHi(); // 안녕하세요.
 
 
-
+// /**
+//  * 참고로 getter와 setter는 User.prototype에 정의됩니다.
+//  * class 의 constructor 생성자를 이용해 멤버변수를 초기화 할때 setter 함수코드를 기반으로 초기화합니다.
+//  */
 // class User {
 
 //     constructor(name) {
 //         // setter를 활성화합니다.
 //         this.name = name;
 //     }
-//     /**
-//      * 참고로 getter와 setter는 User.prototype에 정의됩니다.
-//      */
 //     get name() {
 //         return this._name;
 //     }
@@ -58,20 +58,23 @@
 // let testConst = new User(""); // 이름이 너무 짧습니다.
 
 
-// /**
-//  * This 함수와 Object, Class 
-//  * 함수 표현식, 함수 선언식, 화살표 함수
-//  * 이해하기
-
-//  * 화살표 함수는 정적 바인딩으로 this의 참조를 고정적으로 가져가며, this 가 선언된 스코프( { } )의 상위객체를 참조 하게 된다.
-//  * 이를 렉시컬 환경(스코프)라고 부른다.
-//  * 렉시컬 환경 정의 : "코드가 작성된 위치에 따라 변수와 상위 스코프를 결정하는 JS의 스코프 체계이다."
-//  * ex) 예를 들면
-//        \ 전역 스코프에서 정의된 경우: 전역 스코프에서 화살표 함수를 정의하면, 그 this는 전역 객체(window 또는 global)를 참조합니다.
-//        \ 객체의 메서드로 정의된 경우: 객체의 메서드로 화살표 함수를 정의하면, 그 this는 해당 객체가 아닌, 그 객체가 정의된 상위 스코프의 this를 참조합니다.
-//        \ 클래스 내부에서 정의된 경우: 클래스 내부에서 화살표 함수를 정의하면, 그 this는 클래스 인스턴스를 참조합니다. 
-//        \                             이는 클래스의 메서드가 인스턴스의 컨텍스트에서 호출되기 때문입니다.
-//  */
+/**
+ * This 함수와 Object, Class 
+ * 함수 표현식, 함수 선언식, 화살표 함수
+ * 이해하기
+ * ----------------------------------------------------------------------------------------------------------------------------------------------------
+ * 함수 선언 : 코드가 실행되기 전에 메모리에 로드
+ * 함수표현식 : 런타임 중에 로딩
+ * 화살표 함수 : 런타임 중에 로딩 + 렉시컬 스코프 적용
+   화살표 함수는 정적 바인딩으로 this의 참조를 고정적으로 가져가며, this 가 선언된 스코프( { } )의 상위객체를 참조 하게 된다.
+   이를 렉시컬 환경(스코프)라고 부른다.
+   렉시컬 환경 정의 : "코드가 작성된 위치에 따라 변수와 상위 스코프를 결정하는 JS의 스코프 체계이다."
+   ex) 예를 들면
+       \ 전역 스코프에서 정의된 경우: 전역 스코프에서 화살표 함수를 정의하면, 그 this는 전역 객체(window 또는 global)를 참조합니다.
+       \ 객체의 메서드로 정의된 경우: 객체의 메서드로 화살표 함수를 정의하면, 그 this는 해당 객체가 아닌, 그 객체가 정의된 상위 스코프의 this를 참조합니다.
+       \ 클래스 내부에서 정의된 경우: 클래스 내부에서 화살표 함수를 정의하면, 그 this는 클래스 인스턴스를 참조합니다. 
+       \                             이는 클래스의 메서드가 인스턴스의 컨텍스트에서 호출되기 때문입니다.
+ */
 
 // let buttonFuncObj = {
 //     value1 : "buttonFuncObj !",
@@ -156,7 +159,7 @@
 // setTimeout(button.clickArrow, 1500);   // "안녕하세요."
 // /**
 //  * 화살표 함수만 제대로 나오는 이유 : 
-//  * callback 등록시 해당 함수부분만 전달되므로 전역 컨텍스트에서 호출하게 된다. 그래서 함수 선언식,표현식 둘다 button을 this로 가리키지 못함
+//  * setTimeout() 함수에 callback 등록시 해당 함수부분만 전달되므로 전역 컨텍스트에서 호출하게 된다. 그래서 함수 선언식,표현식 둘다 button을 this로 가리키지 못함
 //  * 그러나 화살표 함수의 경우 정적 바인딩이므로 고정적으로 this 의 타겟을 참조 할 수 있음
 //  * 또한 렉시컬 환경이 적용되므로 상위 객체를 this로 참조 하게 된다. [ 상위 객체를 this로 참조란 >> { }스코프 상위의 존재를 의미함 ]
 //  * 따라서 화살표 함수에서의 this 는 상위객체인 button 인스턴스를 가리키게 되므로 어디서든 button인스턴스를 this로 가리킬 수 있다.
@@ -381,6 +384,9 @@
 // | {}.toString   | 원시형, 내장 객체,                 | Symbol.toStringTag가 있는 객체 문자열             |
 // | instanceof    | 객체                              | true나 false                                     |
 
+// tip > {}.toString === Object.prototype.toString 이다.
+// ex  > { }.toString.call([]) === Object.prototype.toString.call([])
+
 // 숫자형 – [object Number]
 // 불린형 – [object Boolean]
 // null – [object Null]
@@ -392,6 +398,7 @@
 // let s = Object.prototype.toString;
 
 // alert(s.call(123));   // [object Number]
+// alert(Object.prototype.toString(123));   // [object object]
 // alert(s.call(null));  // [object Null]
 // alert(s.call(alert)); // [object Function]
 // alert(Object.prototype.toString.call([]))   // [object Array]
@@ -421,11 +428,11 @@
 //     }
 // }
 // let instance = new MyClass();
-// alert(Object.prototype.toString.call(instance)); // [object MyClass]
+// alert(Object.prototype.toString.call(instance)); // [object MyClass <<<-- 유지보수 용이하게 가능]
 
 
 // /**
-//  * 에러 핸들링 try - catch - finally
+//  * 에러 핸들링 try{ } - catch(e){ } - finally{ }
 //  */
 // let json = "{ bad json }";
 
