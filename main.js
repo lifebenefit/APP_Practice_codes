@@ -465,67 +465,67 @@
 // alert(json2)
 
 
-// class ReadError extends Error {
-//     constructor(message, cause) {
-//         super(message);
-//         this.cause = cause;
-//         this.name = 'ReadError';
-//     }
-// }
+class ReadError extends Error {
+    constructor(message, cause) {
+        super(message);
+        this.cause = cause;
+        this.name = 'ReadError';
+    }
+}
 
-// class ValidationError extends Error { /*...*/ }
-// class PropertyRequiredError extends ValidationError { /* ... */ }
+class ValidationError extends Error { /*...*/ }
+class PropertyRequiredError extends ValidationError { /* ... */ }
 
-// function validateUser(user) {
-//     if (!user.age) {
-//         throw new PropertyRequiredError("age");
-//     }
+function validateUser(user) {
+    if (!user.age) {
+        throw new PropertyRequiredError("age");
+    }
 
-//     if (!user.name) {
-//         throw new PropertyRequiredError("name");
-//     }
-// }
+    if (!user.name) {
+        throw new PropertyRequiredError("name");
+    }
+}
 
-// function readUser(json) {
-//     let user;
+function readUser(json) {
+    let user;
 
-//     try {
-//         user = JSON.parse(json);
-//     } catch (err) {
-//         if (err instanceof SyntaxError) {
-//             throw new ReadError("Syntax Error", err);
-//         } else {
-//             throw err;
-//         }
-//     }
+    try {
+        user = JSON.parse(json);
+    } catch (err) {
+        if (err instanceof SyntaxError) {
+            throw new ReadError("Syntax Error", err);
+        } else {
+            throw err;
+        }
+    }
 
-//     try {
-//         validateUser(user);
-//     } catch (err) {
-//         if (err instanceof ValidationError) {
-//             throw new ReadError("Validation Error", err);
-//         } else {
-//             throw err;
-//         }
-//     }
+    try {
+        validateUser(user);
+    } catch (err) {
+        if (err instanceof ValidationError) {
+            throw new ReadError("Validation Error", err);
+        } else {
+            throw err;
+        }
+    }
 
-// }
+}
 
-// try {
-//     // let jsonMsg = '{"age": 18, "name" : "john"}'  // 오케이
-//     // let jsonMsg = '{"age": 18, "name" : ""}'  // Original error: Error: name
-//     let jsonMsg = '{"age": 18}'  // Original error: Error: name
-//     // let jsonMsg = '{형식이 아예 틀리면}'  // Original error: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
-//     readUser(jsonMsg);
-// } catch (e) {
-//     if (e instanceof ReadError) {
-//         alert(e);
-//         // Original error: SyntaxError: Unexpected token b in JSON at position 1
-//         alert("Original error: " + e.cause);
-//     } else {
-//         throw e;
-//     }
-// }
+try {
+    // let jsonMsg = '{"age": 18, "name" : "john"}'  // 오케이
+    // let jsonMsg = '{"age": 18, "name" : ""}'  // Original error: Error: name
+    let jsonMsg = '{"age": 18}'  // Original error: Error: name
+    // let jsonMsg = '{형식이 아예 틀리면}'  // Original error: SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)
+    readUser(jsonMsg);
+} catch (e) {
+    if (e instanceof ReadError) {
+        alert(e);
+        // Original error: SyntaxError: Unexpected token b in JSON at position 1
+        alert("Original error: " + e.cause);
+    } else {
+        throw e;
+    }
+}
 
 
 
