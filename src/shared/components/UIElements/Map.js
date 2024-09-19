@@ -18,7 +18,7 @@ const Map = props => {
 
     new window.google.maps.Marker(
       {
-        position: props.center,
+        position: center,
         map: map
       }
     );

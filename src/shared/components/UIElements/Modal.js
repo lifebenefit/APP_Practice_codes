@@ -31,8 +31,9 @@ const ModalOverlay = props => {
 const Modal = props => {
   return (
     <React.Fragment>
-      {/* {props.show && <Backdrop onClick={props.onCancel} />} */}
       {props.show ? <Backdrop onClick={props.onCancel} /> : null}
+      {/* {props.show && <Backdrop onClick={props.onCancel} />} <-- 어두운 배경 클릭시 Cancel 핸들러 동작*/}
+
       <CSSTransition
         in={props.show} // CSSTransition 의 in props 가 true 면 mount 하고 false면 unmount 함
         mountOnEnter
