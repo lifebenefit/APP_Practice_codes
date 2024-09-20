@@ -49,4 +49,5 @@ const PlaceItem = props => {
   );
 };
 
-export default PlaceItem; 
+export default PlaceItem;
+
