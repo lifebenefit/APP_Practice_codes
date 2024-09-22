@@ -1,4 +1,3 @@
-import React from "react";
 import { useCallback, useReducer } from "react";
 /**
  * 커스텀 훅
@@ -7,7 +6,7 @@ import { useCallback, useReducer } from "react";
  */
 
 const formReducer = (state, action) => {
-    console.log(state)
+    // console.log(state)
     switch (action.type) {
         case 'INPUT_CHANGE':
             let formIsValid = true;
@@ -32,6 +31,11 @@ const formReducer = (state, action) => {
                 },
                 isValid: formIsValid
             };
+        case 'SET_DATA':
+            return {
+                inputs: action.inputs,
+                isValid: action.formIsValid
+            };
         default:
             return state;
     }
@@ -51,11 +55,24 @@ export const useForm = (initialInputs, initialFormValidity) => {
             inputId: id
         })
     }, []);
+    /*
+     * 밑에 두 함수는 기본적으로 기능이 동일하다.
+     * const exam = (a) => { return 1; }
+     * const exam = useCallback((a) => { return 1; })
+    */
     // userCallback 함수를 쓰지 않으면 NewPlace 내부에 있는 함수들은 호출될떄마다 새로운 함수 인스턴스가 생성된다.
     // 이를 방지 하기 위해 쓰는게 userCallback
     // userCallback(함수,[의존성]) "의존성" 배열이 바뀌지 않는 이상 동일한 함수 인스턴스를 사용한다.
     // [const descriptionInputHandler = useCallback((id, value, isValid) => { }, []);]
     //  -> 빈 배열의 의미 >> 초기 렌더링 시 한 번만 생성 한다는 의미와 동일함. or 상태(props)변화에 의존하지 않음
 
-    return [formState, InputHandler]
+    const setFormData = useCallback((inputData, formValidity) => {
+        dispatch({
+            type: 'SET_DATA',
+            inputs: inputData,
+            formIsValid: formValidity
+        })
+    }, []);
+
+    return [formState, InputHandler, setFormData];
 };

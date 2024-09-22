@@ -31,7 +31,7 @@ const NewPlace = () => {
         //TODO: 이후엔 이 fomrState.inputs data를 BackEnd 로 보내야함.
         console.log(formState.inputs);
     }
-    console.log(`ADD PLACE 활성화 : ${formState.isValid}`);
+    // console.log(`ADD PLACE 활성화 : ${formState.isValid}`);
     return (
         <form className="place-form" onSubmit={placeSubmitHandler}>
             <Input
