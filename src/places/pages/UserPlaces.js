@@ -29,6 +29,13 @@ const DUMMY_PLACES = [
   }
 ];
 
+
+// // 렌더링 하는 루트 JS 에서 이렇게 UserPlaces 를 렌더링 한다면
+// // :userId 에 들어가는 동적인 값이 "useParams().userId;" 여기로 호출 된다.
+// <Route path="/:userId/places" exact>
+//   <UserPlaces />
+// </Route>
+
 const UserPlaces = () => {
   const userId = useParams().userId;
   const loadedPlaces = DUMMY_PLACES.filter(

@@ -1,73 +1,39 @@
-import React, { useCallback, useReducer } from "react";
-
+import React from "react";
 import Input from '../../shared/components/FormElements/Input';
 import Button from '../../shared/components/FormElements/Button';
 import {
     VALIDATOR_MINLENGTH,
     VALIDATOR_REQUIRE
 } from "../../shared/util/validators";
-import "./NewPlace.css";
+import "./PlaceForm.css";
 
-const formReducer = (state, action) => {
-    switch (action.type) {
-        case 'INPUT_CHANGE':
-            let formIsValid = true;
-            for (const inputId in state.inputs) {
-                if (inputId === action.inputId) {
-                    // dispatch 한 ID 를 업데이트 한다
-                    formIsValid = formIsValid && action.isValid;
-                } else {
-                    // dispatch 한 ID 를 업데이트 하지 않고
-                    // 기존의 있는 id 를 가져온다
-                    formIsValid = formIsValid && state.inputs[inputId].isValid;
-                }
-            }
-            return {
-                ...state,
-                inputs: {
-                    ...state.inputs,
-                    [action.inputId]: {
-                        value: action.value,
-                        isValid: action.isValid
-                    }
-                },
-                isValid: formIsValid
-            };
-        default:
-            return state;
-    }
-};
+import { useForm } from "../../shared/hooks/form-hook";
 
 const NewPlace = () => {
-    const [formState, dispatch] = useReducer(formReducer, {
-        inputs: {
-            title: {
-                value: '',
-                isValid: false
-            },
-            description: {
-                value: '',
-                isValid: false
-            }
+    const [formState, InputHandler] = useForm({
+        title: {
+            value: '',
+            isValid: false
         },
-        isValid: false
-    });
+        description: {
+            value: '',
+            isValid: false
+        },
+        address: {
+            value: '',
+            isValid: false
+        }
+    }, false)
 
-    const InputHandler = useCallback((id, value, isValid) => {
-        dispatch({
-            type: 'INPUT_CHANGE',
-            value: value,
-            isValid: isValid,
-            inputId: id
-        })
-    }, []);
-    // userCallback 함수를 쓰지 않으면 NewPlace 내부에 있는 함수들은 호출될떄마다 새로운 함수 인스턴스가 생성된다.
-    // 이를 방지 하기 위해 쓰는게 userCallback
-    // userCallback(함수,[의존성]) "의존성" 배열이 바뀌지 않는 이상 동일한 함수 인스턴스를 사용한다.
-    // [const descriptionInputHandler = useCallback((id, value, isValid) => { }, []);]
-    //  -> 빈 배열의 의미 >> 초기 렌더링 시 한 번만 생성 한다는 의미와 동일함. or 상태(props)변화에 의존하지 않음
+    const placeSubmitHandler = event => {
+        // ADD PLACE 를 누르면 새로고침 되는게 Default 설정이므로 새로고침 안되게끔 방지하는 코드
+        event.preventDefault();
+        //TODO: 이후엔 이 fomrState.inputs data를 BackEnd 로 보내야함.
+        console.log(formState.inputs);
+    }
+    console.log(`ADD PLACE 활성화 : ${formState.isValid}`);
     return (
-        <form className="place-form">
+        <form className="place-form" onSubmit={placeSubmitHandler}>
             <Input
                 id="title"
                 element="input"
@@ -83,6 +49,14 @@ const NewPlace = () => {
                 label="Description"
                 validators={[VALIDATOR_MINLENGTH(5)]}
                 errorText="Please Enter a valid description (at least 5 characters)"
+                onInput={InputHandler}
+            />
+            <Input
+                id="address"
+                element="input"
+                label="Address"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please Enter a valid address"
                 onInput={InputHandler}
             />
             <Button type="submit" disabled={!formState.isValid}>

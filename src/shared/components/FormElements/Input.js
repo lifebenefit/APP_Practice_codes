@@ -29,9 +29,9 @@ const Input = props => {
   // 상태가 더 복잡하거나 상호 연관된 상태 일 때 useReducer 을 쓰면 코드가 더 간단해진다.
 
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: '',
+    value: props.initialValue || '',  // props.value 이 Empty면 ''
     isTouched: false,
-    isValid: false
+    isValid: props.initialValid || false // props.value 이 Empty면 false
   });
 
   const { id, onInput } = props;

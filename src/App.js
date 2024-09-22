@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Users from './user/pages/Users';
 import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
+import UpdatePlace from './places/pages/UpdatePlace';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 
 // function App() {
@@ -25,6 +26,11 @@ const App = () => {
           <Route path="/places/new" exact>
             <NewPlace />
           </Route>
+          {/* <Route path="/places/new" element={<NewPlace />} /> */}
+          <Route path="/places/:placeId">
+            <UpdatePlace />
+          </Route>
+          {/* 위에 정의된 경로 외에 경로는 전부 '/'로 향하게 한다. */}
           <Redirect to="/" />
         </Switch>
       </main>
