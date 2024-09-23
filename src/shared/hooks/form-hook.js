@@ -5,12 +5,29 @@ import { useCallback, useReducer } from "react";
  * 해당 커스텀 로직의 경우, UpdatePlace, NewPlace 에서 사용됨
  */
 
+// action ===
+//             {
+//                 inputs: {
+//                     title: {
+//                         value: "",
+//                         isValid: false
+//                     },
+//                     description: {
+//                         value: "",
+//                         isValid: false
+//                     }
+//                 },
+//                 isValid: false
+//             }
 const formReducer = (state, action) => {
     // console.log(state)
     switch (action.type) {
         case 'INPUT_CHANGE':
             let formIsValid = true;
             for (const inputId in state.inputs) {
+                if (!state.inputs[inputId]){
+                    continue; // inputId 가 undefined 인 경우의 for문 패턴은 Skip 한다.
+                }
                 if (inputId === action.inputId) {
                     // dispatch 한 ID 를 업데이트 한다
                     formIsValid = formIsValid && action.isValid;
@@ -42,6 +59,20 @@ const formReducer = (state, action) => {
 };
 
 export const useForm = (initialInputs, initialFormValidity) => {
+    // const [formState, dispatch] = useReducer(formReducer, {
+    //     inputs: {
+    //         title: {
+    //             value: "",
+    //             isValid: false
+    //         },
+    //         description: {
+    //             value: "",
+    //             isValid: false
+    //         }
+    //     },
+    //     isValid: false
+    // });
+
     const [formState, dispatch] = useReducer(formReducer, {
         inputs: initialInputs,
         isValid: initialFormValidity
