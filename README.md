@@ -14,4 +14,6 @@ Node 버전 에러시, pacakge.json 에
     "start": "react-scripts --openssl-legacy-provider start",
 추가 및 수정
 
+sector_5 종료
+
 # APP_Practice_codes
