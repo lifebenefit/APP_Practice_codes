@@ -1,6 +1,8 @@
 설치 해야할 것
 1. node
-2. express
+2. express ($ npm install express)
+3. nodemon ($ npm install nodemon --save-dev)
+4. body-parser ($ npm install body-parser)
 
 ->
   npm init

@@ -1,19 +1,23 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log('MIDDLEWARE');
-  next();
+app.use((req, res, next) => { bodyParser.urlencoded({ extended: false }) });
+
+app.post('/user', (req, res, next) => {
+  res.send('<h1> User : ' + req.body.username + '</h1>')
 });
 
-app.use((req, res, next) => {
+app.use('/use_test', (req,res,next) => {
+    console.log('/use_test 뿐만아니라 /use_test/XXX 와 같은 URL에 요청을 처리함');
+})
+
+app.get('/', (req, res, next) => {
   res.send(
-    '<form method="POST"><input type="text" name="username"><button type="submit"> Create User </button></form>'
+    '<form action="/user" method="POST"><input type="text" name="username"><button type="submit"> Create User </button></form>'
   );
-  // next();
-  // 안되겠다 시발 이거 다시 듣자 
-  //TODO: Express 관련 함수나 구조 파악 필요
+  console.log('SEND !');
 });
 
-app.listen(5000);
+app.listen(5000, () => console.log('Server is running on port 5000'));
