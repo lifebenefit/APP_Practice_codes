@@ -18,6 +18,7 @@ Lib 설치 Script
 $ npm init
 $ npm install --save express body-parser
 $ npm install --save-dev nodemon
+$ npm install --save uuid
 
 $ npm run start
 << "start": "nodemon app.js" >>
