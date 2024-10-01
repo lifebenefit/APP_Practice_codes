@@ -19,6 +19,8 @@ $ npm init
 $ npm install --save express body-parser
 $ npm install --save-dev nodemon
 $ npm install --save uuid
+$ npm install --save express-validator
+$ npm install --save axios
 
 $ npm run start
 << "start": "nodemon app.js" >>

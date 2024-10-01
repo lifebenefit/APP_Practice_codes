@@ -1,7 +1,10 @@
-const HttpError = require('../models/http-error')
 const { v4: uuidV4 } = require('uuid');
+const { validationResult } = require('express-validator');
 
-const DUMMY_PLACES = [
+const HttpError = require('../models/http-error');
+const getCoordsForAddress = require('../util/location');
+
+let DUMMY_PLACES = [
   {
     id: 'p1',
     title: 'Daeu Ivile',
@@ -26,7 +29,7 @@ const getPlaceById = (req, res, next) => {
     throw new HttpError('Could not find a place for the provided id', 404)
     // const error = new Error('Could not find a place for the provided id');
     // error.code = 404;
-    // throw error;  // 동기식 동작인 경우 throw 가능, 근데 보통 비동기코드 일 거임.
+    // throw error;  // 해당 함수가 async 나 promis 같은 비동기 함수인 경우, throw 사용 불가
     // // next(error);
     // // return;
   }
@@ -34,26 +37,42 @@ const getPlaceById = (req, res, next) => {
 };
 
 
-const getPlaceByUserId = (req, res, next) => {
+const getPlacesByUserId = (req, res, next) => {
   const userId = req.params.uid;
 
-  const place = DUMMY_PLACES.find(p => {
+  const places = DUMMY_PLACES.filter(p => {
     return p.creator === userId;
   });
 
-  if (!place) {
+  if (!places || places === 0) {
     return next(
-      new HttpError('Could not find a place for the provided user id', 404));
-    // const error = new Error('Could not find a place for the provided user id');
+      new HttpError('Could not find a places for the provided user id', 404));
+    // const error = new Error('Could not find a places for the provided user id');
     // error.code = 404;
-    // // throw error;  // 동기식 동작인 경우 throw 가능, 근데 보통 비동기코드 일 거임.
+    // throw error;  // 해당 함수가 async 나 promis 같은 비동기 함수인 경우, throw 사용 불가
     // return next(error);
   }
-  res.json({ place }); // {place} 는 {place:place} 의 축약형
+  res.json({ places }); // {places} 는 {places:places} 의 축약형
 };
 
-const createPlace = (req, res, next) => {
-  const { title, description, coordinates, address, creator } = req.body;
+const createPlace = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    res.status(422);
+    return next(new HttpError(
+      'Invalid Input ..., createPlace Fail', 422
+    ));
+  }
+
+  const { title, description, address, creator } = req.body;
+
+  let coordinates;
+  try {
+    coordinates = await getCoordsForAddress(address);
+  } catch (error) {
+    return next(error);
+  }
   // const title = req.body.title;
   const createPlace = {
     id: uuidV4(),
@@ -69,6 +88,13 @@ const createPlace = (req, res, next) => {
 };
 
 const updatePlaceById = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    console.log(errors);
+    res.status(422);
+    throw new HttpError('Invalid Input ..., updatePlaceById Fail');
+  }
+
   const { title, description } = req.body;
   const placeId = req.params.pid;
 
@@ -82,7 +108,7 @@ const updatePlaceById = (req, res, next) => {
   //   DUMMY_PLACES.find(p => {
   //     return p.id === placeId;
   //   });
-  const updatedPlace = {...DUMMY_PLACES.find(p => p.id === placeId)};
+  const updatedPlace = { ...DUMMY_PLACES.find(p => p.id === placeId) };
 
   console.log(Object.prototype.toString.call(updatedPlace));
   console.log(updatedPlace);
@@ -97,12 +123,21 @@ const updatePlaceById = (req, res, next) => {
 };
 
 const deletePlace = (req, res, next) => {
+  const placeId = req.params.pid;
 
+  if (!DUMMY_PLACES.find(p => p.id === placeId)) {
+    console.log(errors);
+    res.status(404);
+    throw new HttpError('Invalid Input ..., deletePlace Fail', 404);
+  }
+
+  DUMMY_PLACES = DUMMY_PLACES.filter(dp => dp.id !== placeId);
+  res.status(200).json({ message: "Deleted place . " })
 }
 
 // module.exports ??여러개는 어떻게?
 exports.getPlaceById = getPlaceById;
-exports.getPlaceByUserId = getPlaceByUserId;
+exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlaceById = updatePlaceById;
 exports.deletePlace = deletePlace;
