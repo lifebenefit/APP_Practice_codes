@@ -117,45 +117,65 @@ const createPlace = async (req, res, next) => {
   res.status(201).json({ place: createPlaceDbCommand });
 };
 
-const updatePlaceById = (req, res, next) => {
+const updatePlace = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors);
     res.status(422);
-    throw new HttpError('Invalid Input ..., updatePlaceById Fail');
+    return next(new HttpError('Invalid Input ..., updatePlace Fail'), 422);
   }
 
   const { title, description } = req.body;
   const placeId = req.params.pid;
 
-  const updatedPlace = { ...DUMMY_PLACES.find(p => p.id === placeId) };
+  console.log("Update DAta : \n", req.body)
+  console.log(title);
+  console.log(`type : ${Object.prototype.toString.call(title)}`);
 
-  const placeIndex = DUMMY_PLACES.findIndex(p => p.id === placeId);
-
-  updatedPlace.title = title;
-  updatedPlace.description = description;
-
-  DUMMY_PLACES[placeIndex] = updatedPlace;
-
-  res.status(200).json({ place: updatedPlace });
-};
-
-const deletePlace = (req, res, next) => {
-  const placeId = req.params.pid;
-
-  if (!DUMMY_PLACES.find(p => p.id === placeId)) {
-    console.log(errors);
-    res.status(404);
-    throw new HttpError('Invalid Input ..., deletePlace Fail', 404);
+  let updatePlaceDbCommand;
+  try {
+    updatePlaceDbCommand = await Place.findById(placeId);
+    updatePlaceDbCommand.title = title;
+    updatePlaceDbCommand.description = description
+  } catch (err) {
+    return next(
+      new HttpError("something went wrong, could not update place.", 500)
+    );
   }
 
-  DUMMY_PLACES = DUMMY_PLACES.filter(dp => dp.id !== placeId);
-  res.status(200).json({ message: "Deleted place . " })
+  try {
+    await updatePlaceDbCommand.save();
+  } catch (err) {
+    return next(
+      new HttpError("something went wrong, could not update place.", 500)
+    );
+  }
+
+  res.status(200).json({ place: updatePlaceDbCommand.toObject({ getters: true }) });
+};
+
+const deletePlace = async (req, res, next) => {
+  const placeId = req.params.pid;
+  console.log(`Delete ${placeId}`);
+
+  try {
+    const place = await Place.findByIdAndDelete(placeId);
+    if (!place) {
+      return next(new HttpError("Could not find place for this id.", 404));
+    }
+  } catch (err) {
+    console.log(err);
+    return next(new HttpError(
+      "something went wrong, could not delete place", 500
+    ));
+  }
+
+  res.status(200).json({ message: "Deleted place . " });
 }
 
 // module.exports ??여러개는 어떻게?
 exports.getPlaceById = getPlaceById;
 exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
-exports.updatePlaceById = updatePlaceById;
+exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;

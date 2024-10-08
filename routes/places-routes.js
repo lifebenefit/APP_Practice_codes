@@ -27,7 +27,7 @@ router.patch('/:pid',
     check('title').not().isEmpty(),
     check('description').isLength({ min: 5 })
   ],
-  placesControllers.updatePlaceById);
+  placesControllers.updatePlace);
 router.delete('/:pid', placesControllers.deletePlace);
 /** 
  * get 이고 post 고 patch, delete 고 기능이 있거나 한 건 아님.
