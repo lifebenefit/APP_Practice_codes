@@ -4,19 +4,18 @@ const { v4: uuidV4 } = require('uuid');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 
-let DUMMY_USERS = [
-  {
-    id: 'p1',
-    name: "kang",
-    email: "kang1994@naver.com",
-    password: 'kangkang'
+const getUsers = async (req, res, next) => {
+  // const users = User.find({}, 'email name')
+  let users;
+  try {
+    users = await User.find({}, '-password');
+    console.log(users);
+  } catch (err) {
+    return next(new HttpError(
+      'Fetching users failed, please try again later', 500
+    ));
   }
-];
-
-const getUsers = (req, res, next) => {
-  // res.status(200);
-  // res.json({ users: DUMMY_USERS })
-  res.status(200).json({ users: DUMMY_USERS });
+  res.json({ users: users.map(user => user.toObject({ getters: true })) });
 };
 
 const signup = async (req, res, next) => {
@@ -29,7 +28,7 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
 
 
   let existingUser;
@@ -52,7 +51,7 @@ const signup = async (req, res, next) => {
     email: email,
     password: password,
     image: "https://nstatic.dcinside.com/ad/2024/banner/240926_WutheringWaves_main_800700.jpg",
-    places: places,
+    places: [],
   });
 
   try {
@@ -69,7 +68,7 @@ const signup = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-  
+
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email })
@@ -80,7 +79,7 @@ const login = async (req, res, next) => {
     ));
   }
 
-  if (!existingUser){
+  if (!existingUser) {
     return next(new HttpError(
       "Email 이 등록되어 있지 않음", 401
     ));
@@ -88,7 +87,7 @@ const login = async (req, res, next) => {
     return next(new HttpError(
       "password 가 틀림", 401
     ));
-  } 
+  }
   // if (!existingUser || existingUser.password !== password){
   //   return next(new HttpError(
   //     "Invalid credential, could not log you in", 401

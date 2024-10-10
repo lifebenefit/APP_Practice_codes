@@ -40,7 +40,7 @@ app.use((error, req, res, next) => {
 const userId = "liam";
 const password = '24hkH6ZRESDkhNnM';
 const clusterName = "cluster0";
-const dbName = "places";
+const dbName = "UserInfo";
 
 const url =
   `mongodb+srv://${userId}:${password}@${clusterName}.m0cno.mongodb.net/${dbName}?retryWrites=true&w=majority`;
