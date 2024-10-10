@@ -1,0 +1,24 @@
+{
+  "name": "section_9",
+  "version": "1.0.0",
+  "description": "Section 소개 ![alt text](image.png)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.0",
+    "express-validator": "^7.2.0",
+    "mongoose": "^8.7.0",
+    "mongoose-unique-validation": "^0.1.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
