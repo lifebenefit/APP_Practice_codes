@@ -64,6 +64,7 @@ Lib 설치 Script
 $ npm init
 $ npm install --save react-router-dom@5 --save-exact
 $ npm install --save react-transition-group
+$ npm install --save axios
 
 3.( 옵션 )
 Node 버전 에러시, pacakge.json 에

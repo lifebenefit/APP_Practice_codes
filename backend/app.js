@@ -12,6 +12,23 @@ const app = express();
 // app.use(bodyParser.json());        // Json Data 전용 : JSON 형식 ( ex) {"name": "John", "age": 30} )
 app.use(bodyParser.json());
 
+app.use((req,res,next) => {
+  // 모든 도메인에서 이 서버에 접근할 수 있도록 허용합니다.
+  res.setHeader('Access-Control-Allow-Origin','*');
+
+  // 요청 헤더에 포함될 수 있는 헤더의 종류를 지정합니다.
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+
+  // 클라이언트가 서버에 요청할 수 있는 HTTP 메서드의 종류를 지정합니다.
+  res.setHeader('Access-Control-Allow-Methods','GET, POST, PATCH, DELETE');
+  
+  // 다음 미들웨어 함수로 제어를 전달합니다.
+  next();
+});
+
 app.use('/api/places', placesRoutes);  // /api/places/...   인 경우만 Routing 하도록 지정
 app.use('/api/users', usersRoutes);
 
