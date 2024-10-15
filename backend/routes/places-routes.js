@@ -4,31 +4,35 @@ const express = require("express");
 const { check } = require('express-validator');
 // check()
 
-
 // 객체 구조 분해
 
 const placesControllers = require('../controllers/places-controllers')
+const { API_PLACES } = require('../config');
 
 const router = express.Router();
 
 
 // app.use('/api/places', placesRoutes);  // /api/places/...   인 경우만 Routing 하도록 지정
-router.get('/:pid', placesControllers.getPlaceById);
-router.get('/user/:uid', placesControllers.getPlacesByUserId);
-router.post('/',
+router.get(API_PLACES.pid, placesControllers.getPlaceById);
+
+router.get(API_PLACES.userUid, placesControllers.getPlacesByUserId);
+
+router.post(API_PLACES.root,
   [
     check('title').not().isEmpty(),
     check('description').isLength({ min: 5 }),
     check('address').not().isEmpty()
   ],
   placesControllers.createPlace);
-router.patch('/:pid',
+
+router.patch(API_PLACES.pid,
   [
     check('title').not().isEmpty(),
     check('description').isLength({ min: 5 })
   ],
   placesControllers.updatePlace);
-router.delete('/:pid', placesControllers.deletePlace);
+
+router.delete(API_PLACES.pid, placesControllers.deletePlace);
 /** 
  * get 이고 post 고 patch, delete 고 기능이 있거나 한 건 아님.
  * 해당 Callback 함수에 구현된 Code 가 전부임

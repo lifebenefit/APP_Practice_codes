@@ -1,3 +1,27 @@
+// import React from "react";
+
+// import UserItem from "./UserItem";
+// import './UserItem.css'
+
+// const UserList = props => {
+//     if (props.items.length == 0) {
+//         return (
+//             <div className="center">
+//                 <h2>등록된 User 없음</h2>
+//             </div>
+//         );
+//     } else {
+//         return (
+//             <ul>
+//                 {props.items.map(user => {
+//                     return <UserItem />;
+//                 })}
+//             </ul>
+//         );
+//     };
+// };
+
+// export default UserList;
 import React from 'react';
 
 import UserItem from './UserItem';
@@ -9,7 +33,7 @@ const UsersList = props => {
     return (
       <div className="center">
         <Card>
-          <h2>No users found.</h2>
+          <h2>등록된 User 없음</h2>
         </Card>
       </div>
     );
@@ -23,7 +47,7 @@ const UsersList = props => {
           id={user.id}
           image={user.image}
           name={user.name}
-          placeCount={user.places}
+          placeCount={user.places.length}
         />
       ))}
     </ul>

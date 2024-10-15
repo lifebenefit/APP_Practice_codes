@@ -8,11 +8,11 @@ const getUsers = async (req, res, next) => {
   // const users = User.find({}, 'email name')
   let users;
   try {
-    users = await User.find({}, '-password');
+    users = await User.find({}, "-password");
     console.log(users);
   } catch (err) {
     return next(new HttpError(
-      'Fetching users failed, please try again later', 500
+      'DB 조회 실패 [ find({}, "-password") ]', 500
     ));
   }
   res.json({ users: users.map(user => user.toObject({ getters: true })) });
@@ -24,7 +24,7 @@ const signup = async (req, res, next) => {
     console.log(errors);
     res.status(422);
     return next(
-      new HttpError('Invalid Input ..., signup Fail', 422)
+      new HttpError('사용자 입력값 유효하지 않음\n 비밀번호 6글자 이상', 422)
     );
   }
 
@@ -36,13 +36,14 @@ const signup = async (req, res, next) => {
     existingUser = await User.findOne({ email: email })
   } catch (err) {
     return next(new HttpError(
-      'Signing up failed, please try again later.', 500
+      'DB 조회 실패 [ findOne({ email: email }) ]', 500
     ));
   }
 
   if (existingUser) {
+    console.log(existingUser);
     return next(new HttpError(
-      "User exit already, lease login instead.", 422
+      "이미 있는 ID 에 중복가입 에러", 421
     ));
   }
 
@@ -94,7 +95,10 @@ const login = async (req, res, next) => {
   //   ));
   // }
 
-  res.json({ message: 'Logged in' });
+  res.json({ 
+    message: 'Logged in' ,
+    user: existingUser.toObject({getters:true})
+  });
 };
 
 // module.exports ??여러개는 어떻게?

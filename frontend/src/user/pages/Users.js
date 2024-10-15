@@ -1,21 +1,40 @@
-import React from "react";
-import UsersList from "../components/UsersList";
+import React, { useEffect, useState } from 'react';
+
+import UsersList from '../components/UsersList';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import { API_BASE, API_USERS } from "../../config";
+
+import { useHttpClient } from "../../shared/hooks/http-hook";
 
 const Users = () => {
-    // DB 대신 여기서 값 대입 [ 원래는 DB 에서 읽어와야 함 ]
-    const USERS = [{
-        id: "u1",
-        name : 'Max schwartz',
-        image : 'https://image.fmkorea.com/files/attach/new/20171104/486616/155548/825707403/c1d17e9b6d79bb902a331d6a3dd622cc.jpeg',
-        places : 3
-    }];
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [loadedUsers, setLoadedUsers] = useState();
 
-    // USER 가 없는 경우 일 때,
-    // const USERS = [];
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.root}`
+        );
 
-    return <UsersList items={USERS} />;
-    // return <h2>User Works!</h2>
+        setLoadedUsers(responseData.users);
+      } catch (err) { }
+    };
+    fetchUsers();
+  }, [sendRequest]);
+
+  return (
+    <React.Fragment>
+      <ErrorModal showError={error} onClear={clearError} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
+    </React.Fragment>
+  );
 };
 
 export default Users;
-
