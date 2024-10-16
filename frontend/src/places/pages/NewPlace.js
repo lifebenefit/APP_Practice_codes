@@ -39,6 +39,7 @@ const NewPlace = () => {
   const history = useHistory();
 
   const placeSubmitHandler = async event => {
+    console.log(111111111);
     // ADD PLACE 를 누르면 새로고침 되는게 Default 설정이므로 새로고침 안되게끔 방지하는 코드
     event.preventDefault();
     try {

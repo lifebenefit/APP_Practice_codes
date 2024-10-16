@@ -24,6 +24,7 @@ $ npm install --save express-validator
 $ npm install --save axios
 $ npm install --save mongoose
 $ npm install --save mongoose-unique-validation
+$ npm install --save console-log-level
 
 실행 Script
 1-1. 

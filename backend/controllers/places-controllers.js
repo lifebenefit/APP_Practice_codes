@@ -32,7 +32,6 @@ const getPlaceById = async (req, res, next) => {
 
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
-  console.log("----------------------------");
 
   /* find 함수 쓰는 경우 */
   // let places;
@@ -52,10 +51,8 @@ const getPlacesByUserId = async (req, res, next) => {
   // res.json({ places: places.map(place => place.toObject({ getters: true })) }); // {places} 는 {places:places} 의 축약형
 
   /* populate 함수 쓰는 경우 */
-  let userWithPlaces
   try {
     userWithPlaces = await User.findById(userId).populate('places');
-    console.log(userWithPlaces);
     if (!userWithPlaces || userWithPlaces.places.length == 0) {
       return next(
         new HttpError('UserId 를 찾을 수 없거나, 해당Id의 places 장소가 비어 있습니다.', 404)
@@ -89,14 +86,13 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  console.log('Request Body >>\n"\n', req.body, '\n"');
-
   const createPlace = new Place({
     title,
     description,
     address,
     location: coordinates,
     image: "https://nstatic.dcinside.com/ad/2024/banner/240926_WutheringWaves_main_800700.jpg",
+    test: "AAAAAA",
     creator
   });
 
@@ -104,7 +100,7 @@ const createPlace = async (req, res, next) => {
   let user;
   try {
     user = await User.findById(creator);
-    console.log(2, user);
+    console.log(`${user} <-해당 USER에 DB Place create!-- ${createPlace}`);
     if (!user) {
       return next(new HttpError('creator Id 가 DB 에 존재 하지 않음.'));
     }
@@ -145,10 +141,6 @@ const updatePlace = async (req, res, next) => {
 
   const { title, description } = req.body;
   const placeId = req.params.pid;
-
-  console.log("Update DAta : \n", req.body)
-  console.log(title);
-  console.log(`type : ${Object.prototype.toString.call(title)}`);
 
   let updatePlaceDbCommand;
   try {
@@ -240,7 +232,6 @@ const deletePlace = async (req, res, next) => {
   //   creator: new ObjectId('67079f5f69b0c7146e252743'),
   //   __v: 0
   // }
-  console.log(1);
   let place;
   try {
     place = await Place.findById(placeId).populate('creator');
@@ -248,7 +239,6 @@ const deletePlace = async (req, res, next) => {
     if (!place) {
       return next(new HttpError("해당 ID에 대한 장소를 찾을 수 없습니다.", 404));
     }
-    console.log(2, place);
   } catch (err) {
     console.error("장소를 찾는 중 오류 발생:", err);
     return next(new HttpError(
@@ -256,7 +246,6 @@ const deletePlace = async (req, res, next) => {
     ));
   }
 
-  console.log(3);
   try {
     // await place.remove();  // 해당 mongoose 에서 사용 되지 않는 구버전 함수
     // await Place.deleteOne({ _id: placeId });  // Place collection에서 _id 가 placeId 인것을 삭제
@@ -268,13 +257,11 @@ const deletePlace = async (req, res, next) => {
     await place.creator.save({ session: _session })  // 변경된 creator 문서를 현재 세션을 사용하여 데이터베이스에 저장
     await _session.commitTransaction();  // 트랜잭션을 커밋하여 모든 변경 사항을 데이터베이스에 영구적으로 반영
 
-    console.log(4);
   } catch (err) {
     return next(new HttpError(
       "문제가 발생하여 장소를 삭제할 수 없습니다.", 500
     ));
   }
-  console.log(5);
 
   res.status(200).json({ message: "장소가 삭제되었습니다." });
 }

@@ -6,6 +6,7 @@ const { DB_INFO, API_BASE } = require('./config');
 const placesRoutes = require('./routes/places-routes');
 const usersRoutes = require('./routes/users-routes');
 const HttpError = require('./models/http-error');
+const log = require("./util/logger");
 
 const app = express();
 

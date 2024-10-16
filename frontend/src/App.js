@@ -9,6 +9,7 @@ import UpdatePlace from './places/pages/UpdatePlace';
 import Auth from './user/pages/Auth';
 import { AuthContext } from './shared/context/auth-context';
 
+
 // function App() {
 //   return <h1>Let's start!</h1>;
 // }
