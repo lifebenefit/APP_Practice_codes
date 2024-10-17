@@ -3,13 +3,14 @@ const { v4: uuidV4 } = require('uuid');
 
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
+const log = require('../util/logger');
 
 const getUsers = async (req, res, next) => {
   // const users = User.find({}, 'email name')
   let users;
   try {
     users = await User.find({}, "-password");
-    console.log(users);
+    log.debug(users);
   } catch (err) {
     return next(new HttpError(
       'DB 조회 실패 [ find({}, "-password") ]', 500
@@ -21,7 +22,7 @@ const getUsers = async (req, res, next) => {
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
+    log.error(errors);
     res.status(422);
     return next(
       new HttpError('사용자 입력값 유효하지 않음\n 비밀번호 6글자 이상', 422)
@@ -41,7 +42,7 @@ const signup = async (req, res, next) => {
   }
 
   if (existingUser) {
-    console.log(existingUser);
+    log.error(existingUser);
     return next(new HttpError(
       "이미 있는 ID 에 중복가입 에러", 421
     ));
@@ -57,7 +58,7 @@ const signup = async (req, res, next) => {
 
   try {
     await createdUser.save();
-    console.log(`ID 생성 성공 >>\n ${createdUser}`)
+    log.debug(`signup 회원가입 완료 >>\n ${createdUser}`)
   } catch (err) {
     return next(new HttpError(
       'Sighing Up failed, please try again', 500

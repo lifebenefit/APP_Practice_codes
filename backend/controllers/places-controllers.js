@@ -6,10 +6,11 @@ const getCoordsForAddress = require('../util/location');
 const Place = require('../models/place');
 const User = require('../models/user');
 // const { default: mongoose } = require('mongoose');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const log = require('../util/logger');
+const error = require('mongoose/lib/error');
 
 const getPlaceById = async (req, res, next) => {
-  console.log('GET Request on getPlaceById function');
   const placeId = req.params.pid;  // {pid : 'p1'}
 
   let place
@@ -55,7 +56,8 @@ const getPlacesByUserId = async (req, res, next) => {
     userWithPlaces = await User.findById(userId).populate('places');
     if (!userWithPlaces || userWithPlaces.places.length == 0) {
       return next(
-        new HttpError('UserId 를 찾을 수 없거나, 해당Id의 places 장소가 비어 있습니다.', 404)
+        // new HttpError('UserId 를 찾을 수 없거나, 해당Id의 places 장소가 비어 있습니다.', 404)
+        new HttpError('장소를 추가해 주세요', 404)
       );
     }
   } catch (err) {
@@ -63,14 +65,15 @@ const getPlacesByUserId = async (req, res, next) => {
       "Fetching places failed, please try again later", 500
     ));
   }
-  res.json({ places: userWithPlaces.places.map(place => place.toObject({ getters: true })) }); // {places} 는 {places:places} 의 축약형
 
+  log.debug(userWithPlaces.places);
+  res.json({ places: userWithPlaces.places.map(place => place.toObject({ getters: true })) }); // {places} 는 {places:places} 의 축약형
 };
 
 const createPlace = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
+    log.error(errors);
     res.status(422);
     return next(new HttpError(
       'Invalid Input ..., createPlace Fail', 422
@@ -78,7 +81,7 @@ const createPlace = async (req, res, next) => {
   }
 
   const { title, description, address, creator } = req.body;
-
+  log.notice(title, description, address, creator);
   let coordinates;
   try {
     coordinates = await getCoordsForAddress(address);
@@ -100,7 +103,7 @@ const createPlace = async (req, res, next) => {
   let user;
   try {
     user = await User.findById(creator);
-    console.log(`${user} <-해당 USER에 DB Place create!-- ${createPlace}`);
+    log.info(`${user} <-해당 USER에 DB Place create!-- ${createPlace}`);
     if (!user) {
       return next(new HttpError('creator Id 가 DB 에 존재 하지 않음.'));
     }
@@ -134,7 +137,7 @@ const createPlace = async (req, res, next) => {
 const updatePlace = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
+    log.error(errors);
     res.status(422);
     return next(new HttpError('Invalid Input ..., updatePlace Fail'), 422);
   }
@@ -166,7 +169,7 @@ const updatePlace = async (req, res, next) => {
 
 const deletePlace = async (req, res, next) => {
   const placeId = req.params.pid;
-  console.log(`Delete ${placeId}`);
+  log.debug(`Delete ${placeId}`);
 
   // findByIdAndDelete << 인자값 기준으로 찾아서 삭제하는 Function
   // try {

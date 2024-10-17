@@ -56,7 +56,7 @@ const NewPlace = () => {
       history.push('/');
     } catch (err) { }
 
-
+    console.log(111111111);
     //TODO: 이후엔 이 fomrState.inputs data를 BackEnd 로 보내야함.
     console.log(formState.inputs);
   }

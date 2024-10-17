@@ -22,12 +22,19 @@ const colors = {
   red: "\x1b[31m",
 };
 
+const debugOff = true;
 function createCustomLogger(level, color) {
-  return function (message) {
-    const { file, line } = getLogDetails();
-    const formattedMessage = `[${file}][${line}][${level}]> ${message}`;
-    console.log(color + formattedMessage + colors.reset);
-  };
+  if (debugOff){
+    return function (message) {
+      const { file, line } = getLogDetails();
+      const formattedMessage = `[${file}][${line}][${level}]> ${message}`;
+      console.log(color + formattedMessage + colors.reset);
+    };
+  } else{
+    return function (message) {
+      ;
+    }
+  }
 }
 
 // 각 로그 레벨에 맞는 색상 적용
@@ -39,12 +46,12 @@ log.error = createCustomLogger ("error ", colors.red);
 
 // 사용 예시
 const a = 1;
-log.error(`로그테스트 : ${a}`);
 log.debug("디버그 메시지");
 log.info("정보 메시지");
 log.notice("공지 메시지");
 log.warn("경고 메시지");
 log.error("에러 메시지");
+log.error(`로그테스트 : ${a}`);
 
 module.exports = log;
 

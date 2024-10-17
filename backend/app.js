@@ -38,7 +38,7 @@ app.use((req, res, next) => {
    * 브라우저에서 404 에러시, 해당 상태 가져오고
    * throw 나 next(error) 로 에러 미들웨어에 던져준다.
    */
-  console.log(`router에 없는 링크로의 접속 시도 : ${req.url}`);
+  log.warn(`router에 없는 링크로의 접속 시도 : ${req.url}`);
   const error = new HttpError('# Could not find this Link !! #', 404);
   throw error;
 });
@@ -47,7 +47,7 @@ app.use((error, req, res, next) => {
   if (res.headerSent) {  //응답과 연결된 헤더가 이미 전송된 상태인지 확인하는 프러파티 이다.
     return next(error);
   }
-  console.log("Error code : 500 ");
+  log.error("Error code : 500 ");
   res.status(error.code || 500) // if(error.code) { return error.code} else { return 500 }
   // 500 : 서버 측 에러 (코드의 버그, 서버 설정 문제, 데이터베이스 연결 오류 등 다양한 이유로 발생)
   res.json({ message: error.message || 'An unknown error occurred!' });
@@ -56,15 +56,15 @@ app.use((error, req, res, next) => {
 
 const url =
   `mongodb+srv://${DB_INFO.userId}:${DB_INFO.password}@${DB_INFO.clusterName}.m0cno.mongodb.net/${DB_INFO.dbName}?retryWrites=true&w=majority`;
-console.log(url);
+log.debug(url);
 
 mongoose
   .connect(url)
   .then(() => {
-    console.log("Connected to DB");
+    log.info("Connected to DB");
     app.listen(DB_INFO.portNumber);
   })
   .catch(error => {
-    console.log("Connection Error")
-    console.log(err);
+    log.error("Connection Error");
+    log.error(err);
   });
