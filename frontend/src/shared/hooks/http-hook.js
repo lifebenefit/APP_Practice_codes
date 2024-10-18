@@ -12,7 +12,7 @@ export const useHttpClient = () => {
   const sendRequest = useCallback(
     async (url, method = "GET", body = null, headers = {}) => {
       // body 가 null 인 경우, headers 가 json 타입이면 fetch에 fail 한다.
-      console.log(`HTTP 요청 url --> \n${url.substring(0, 22)} \n${url.substring(22, )}`);
+      console.log(`HTTP 요청 url --> ${method} }\n${url.substring(0, 22)} \n${url.substring(22, )}`);
 
       if (body !== null) {
         headers = { "Content-Type": "application/json" };

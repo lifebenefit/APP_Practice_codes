@@ -39,7 +39,6 @@ const NewPlace = () => {
   const history = useHistory();
 
   const placeSubmitHandler = async event => {
-    console.log(111111111);
     // ADD PLACE 를 누르면 새로고침 되는게 Default 설정이므로 새로고침 안되게끔 방지하는 코드
     event.preventDefault();
     try {
@@ -55,10 +54,6 @@ const NewPlace = () => {
       // Redirect the user to a different page
       history.push('/');
     } catch (err) { }
-
-    console.log(111111111);
-    //TODO: 이후엔 이 fomrState.inputs data를 BackEnd 로 보내야함.
-    console.log(formState.inputs);
   }
   // console.log(`ADD PLACE 활성화 : ${formState.isValid}`);
   return (
