@@ -49,7 +49,8 @@ const NewPlace = () => {
           description: formState.inputs.description.value,
           address: formState.inputs.address.value,
           creator: auth.userId
-        })
+        }),
+        { "Content-Type": "application/json" }
       );
       // Redirect the user to a different page
       history.push('/');

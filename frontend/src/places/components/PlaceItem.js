@@ -37,7 +37,7 @@ const PlaceItem = props => {
     try {
       await sendRequest(
         `${API_BASE.home}${API_BASE.placesRoutes}/${props.id}`,
-        "DELETE"
+        "DELETE",
       );
       props.onDeletePlace(props.id);
     } catch (err) { }

@@ -2,6 +2,7 @@ const express = require("express");
 const { check } = require("express-validator");
 
 const usersControllers = require('../controllers/users-controllers');
+const fileUpload = require("../middleware/file-upload")
 const { API_USERS, API_BASE } = require('../config');
 
 const router = express.Router();
@@ -9,7 +10,9 @@ const router = express.Router();
 // app.use('/api/places', placesRoutes);  // /api/places/...   인 경우만 Routing 하도록 지정
 router.get(API_USERS.root, usersControllers.getUsers);
 
-router.post(API_USERS.signup,
+router.post(
+  API_USERS.signup,
+  fileUpload.single('image'),
   [
     check('name').not().isEmpty(),
     check('email')

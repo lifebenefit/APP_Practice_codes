@@ -14,9 +14,10 @@ export const useHttpClient = () => {
       // body 가 null 인 경우, headers 가 json 타입이면 fetch에 fail 한다.
       console.log(`HTTP 요청 url --> ${method} }\n${url.substring(0, 22)} \n${url.substring(22, )}`);
 
-      if (body !== null) {
-        headers = { "Content-Type": "application/json" };
-      }
+      // if (body !== null) {
+      //   headers = { "Content-Type": "application/json" };
+      // }
+      
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);

@@ -39,16 +39,16 @@ const Auth = () => {
   const switchModeHandler = () => {
     if (!isLoginMode) {
       setFormData({
-        ...formState.inputs,    // 기존의 값은 유지하며 
-        name: undefined,         // name 필드만 undefined함
+        ...formState.inputs,     // 기존의 값은 유지하며 
+        name: undefined,         // name 필드만 undefined 함
         image: undefined,
-      }, formState.inputs.email.isValid &&
-      formState.inputs.password.isValid);
+      }, formState.inputs.email.isValid && formState.inputs.password.isValid
+      );
     } else {
       setFormData(
         {
-          ...formState.inputs,
-          name: {
+          ...formState.inputs,    // 기존의 값은 유지하며 
+          name: {                 // 다른 필드의 값만 Add 함.
             value: '',
             isValid: false,
           },
@@ -65,41 +65,64 @@ const Auth = () => {
 
   const authSubmitHandler = async event => {
     event.preventDefault(); // 폼 제출 시 기본 동작인 페이지 새로고침을 막고, 다른 작업을 수행할 수 있습니다.
-
-    console.log(formState.inputs);
+    // console.log(formState.inputs);
 
     // fetch 함수를 쓰는 경우
     if (isLoginMode) {
       // 로그인 모드일 때의 로직
       try {
-        const responseData = await sendRequest(`${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.login}`,
+        const responseData = await sendRequest(
+          `${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.login}`,
           'POST',
           JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
-          })
+          }),
+          { "Content-Type": "application/json" }
         );
         console.log(responseData);
         // auth.userId = responseData.user.id;
         auth.login(responseData.user.id); // useState를 쓰기위함
 
       } catch (err) { }
+      /** image data 가 없는 JSON 타입일떄 */
+      // } else {
+      //   // 회원가입 모드일 때의 로직
+      //   try {
+      //     const responseData = await sendRequest(
+      //       `${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.signup}`,
+      //       'POST',
+      //       JSON.stringify({
+      //         name: formState.inputs.name.value,
+      //         email: formState.inputs.email.value,
+      //         password: formState.inputs.password.value
+      //       }),
+      //       { "Content-Type": "application/json" }
+      //     );
+      //     console.log(responseData);
+      //     // auth.userId = responseData.user.id;
+      //     auth.login(responseData.user.id); // useState를 쓰기위함
+
+      //   } catch (err) { }
+
+
     } else {
       // 회원가입 모드일 때의 로직
       try {
+        const formData = new FormData();
+        formData.append('name', formState.inputs.name.value);
+        formData.append('email', formState.inputs.email.value);
+        formData.append('password', formState.inputs.password.value);
+        formData.append('image', formState.inputs.image.value);
+
         const responseData = await sendRequest(
           `${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.signup}`,
           'POST',
-          JSON.stringify({
-            name: formState.inputs.name.value,
-            email: formState.inputs.email.value,
-            password: formState.inputs.password.value
-          })
+          formData
         );
         console.log(responseData);
         // auth.userId = responseData.user.id;
         auth.login(responseData.user.id); // useState를 쓰기위함
-
       } catch (err) { }
     }
   };
