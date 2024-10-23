@@ -1,14 +1,15 @@
-const { v4: uuidV4 } = require('uuid');
 const { validationResult } = require('express-validator');
+const mongoose = require('mongoose');
+const fs = require('fs');
 
 const HttpError = require('../models/http-error');
 const getCoordsForAddress = require('../util/location');
 const Place = require('../models/place');
 const User = require('../models/user');
 // const { default: mongoose } = require('mongoose');
-const mongoose = require('mongoose');
-const log = require('../util/logger');
 const error = require('mongoose/lib/error');
+
+const log = require('../util/logger');
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;  // {pid : 'p1'}
@@ -94,8 +95,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image: "https://nstatic.dcinside.com/ad/2024/banner/240926_WutheringWaves_main_800700.jpg",
-    test: "AAAAAA",
+    image: req.file.path,
     creator
   });
 
@@ -169,8 +169,6 @@ const updatePlace = async (req, res, next) => {
 
 const deletePlace = async (req, res, next) => {
   const placeId = req.params.pid;
-  log.debug(`Delete ${placeId}`);
-
   // findByIdAndDelete << 인자값 기준으로 찾아서 삭제하는 Function
   // try {
   //   const place = await Place.findByIdAndDelete(placeId);
@@ -243,11 +241,13 @@ const deletePlace = async (req, res, next) => {
       return next(new HttpError("해당 ID에 대한 장소를 찾을 수 없습니다.", 404));
     }
   } catch (err) {
-    console.error("장소를 찾는 중 오류 발생:", err);
+    log.error("장소를 찾는 중 오류 발생:", err);
     return next(new HttpError(
       "문제가 발생하여 장소를 삭제할 수 없습니다.", 500
     ));
   }
+
+  // const imagePath = place.image;
 
   try {
     // await place.remove();  // 해당 mongoose 에서 사용 되지 않는 구버전 함수
@@ -261,10 +261,15 @@ const deletePlace = async (req, res, next) => {
     await _session.commitTransaction();  // 트랜잭션을 커밋하여 모든 변경 사항을 데이터베이스에 영구적으로 반영
 
   } catch (err) {
+    log.error("문제가 발생하여 장소를 삭제할 수 없습니다.", err);
     return next(new HttpError(
       "문제가 발생하여 장소를 삭제할 수 없습니다.", 500
     ));
   }
+
+  fs.unlink(place.image, err => {
+    err ? log.error(`파일 삭제 에러 [${err}]`) : log.debug(`${place.image} 파일 삭제 완료`);
+  });
 
   res.status(200).json({ message: "장소가 삭제되었습니다." });
 }

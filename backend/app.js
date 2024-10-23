@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -13,6 +15,9 @@ const app = express();
 // app.use(bodyParser.urlencoded());  // Form Data 전용 : HTML 폼 ( ex) name=John&age=30 )
 // app.use(bodyParser.json());        // Json Data 전용 : JSON 형식 ( ex) {"name": "John", "age": 30} )
 app.use(bodyParser.json());
+
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
+// uploads/images 라는 경로에 있는 파일들을 반환가능하게 함
 
 app.use((req, res, next) => {
   // 모든 도메인에서 이 서버에 접근할 수 있도록 허용합니다.
@@ -44,6 +49,15 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
+  if (req.file) {
+    log.notice(`업로딩된 Image info : ${req.file}`);
+    console.dir(req.file.originalname);
+    console.dir(req.file.destination);
+    console.dir(req.file.path);
+    fs.unlink(req.file.path, err => {
+      log.notice(err);
+    })
+  }
   if (res.headerSent) {  //응답과 연결된 헤더가 이미 전송된 상태인지 확인하는 프러파티 이다.
     return next(error);
   }

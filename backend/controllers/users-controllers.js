@@ -12,7 +12,7 @@ const getUsers = async (req, res, next) => {
   let users;
   try {
     users = await User.find({}, "-password");
-    log.debug(users);
+    // log.debug(users);
   } catch (err) {
     return next(new HttpError(
       'DB 조회 실패 [ find({}, "-password") ]', 500
@@ -53,7 +53,7 @@ const signup = async (req, res, next) => {
     name: name,
     email: email,
     password: password,
-    image: "https://nstatic.dcinside.com/ad/2024/banner/240926_WutheringWaves_main_800700.jpg",
+    image: req.file.path,
     places: [],
   });
 

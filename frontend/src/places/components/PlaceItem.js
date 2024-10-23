@@ -13,12 +13,14 @@ import { API_BASE } from "../../config";
 import { AuthContext } from '../../shared/context/auth-context';
 
 import './PlaceItem.css';
+// import { useHistory } from "react-router-dom";
 
 const PlaceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false)
+  // const history = useHistory();
 
   const openMapHandler = () => setShowMap(true);
 
@@ -40,17 +42,20 @@ const PlaceItem = props => {
         "DELETE",
       );
       props.onDeletePlace(props.id);
+      
+      console.log(`confirmDeleteHandler : ${'/' + auth.userId + '/places'}`);
+      // history.push('/' + auth.userId + '/places');
     } catch (err) { }
   };
 
   //
-  if (isLoading) {
-    return (
-      <div className="center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="center">
+  //       <LoadingSpinner />
+  //     </div>
+  //   );
+  // }
   //
 
   return (
@@ -97,7 +102,7 @@ const PlaceItem = props => {
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
-            <img src={props.image} alt={props.title} />
+            <img src={`${API_BASE.home}/${props.image}`} alt={props.title} />
           </div>
           <div className="place-item__info">
             <h2>{props.title}</h2>

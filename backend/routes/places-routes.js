@@ -1,12 +1,9 @@
 const express = require("express");
-// const validator = require('express-validator');
-// validator.check()
 const { check } = require('express-validator');
-// check()
 
-// 객체 구조 분해
+const placesControllers = require('../controllers/places-controllers');
+const fileUpload = require("../middleware/file-upload");
 
-const placesControllers = require('../controllers/places-controllers')
 const { API_PLACES } = require('../config');
 
 const router = express.Router();
@@ -17,22 +14,30 @@ router.get(API_PLACES.pid, placesControllers.getPlaceById);
 
 router.get(API_PLACES.userUid, placesControllers.getPlacesByUserId);
 
-router.post(API_PLACES.root,
+router.post(
+  API_PLACES.root,
+  fileUpload.single('image'),
   [
     check('title').not().isEmpty(),
     check('description').isLength({ min: 5 }),
     check('address').not().isEmpty()
   ],
-  placesControllers.createPlace);
+  placesControllers.createPlace
+);
 
-router.patch(API_PLACES.pid,
+router.patch(
+  API_PLACES.pid,
   [
     check('title').not().isEmpty(),
     check('description').isLength({ min: 5 })
   ],
-  placesControllers.updatePlace);
+  placesControllers.updatePlace
+);
 
-router.delete(API_PLACES.pid, placesControllers.deletePlace);
+router.delete(
+  API_PLACES.pid, 
+  placesControllers.deletePlace
+);
 /** 
  * get 이고 post 고 patch, delete 고 기능이 있거나 한 건 아님.
  * 해당 Callback 함수에 구현된 Code 가 전부임

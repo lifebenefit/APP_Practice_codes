@@ -28,6 +28,7 @@ function createCustomLogger(level, color) {
     return function (message) {
       const { file, line } = getLogDetails();
       const formattedMessage = `[${file}][${line}][${level}]> ${message}`;
+      // console.log(color + formattedMessage + colors.reset);
       console.log(color + formattedMessage + colors.reset);
     };
   } else{
