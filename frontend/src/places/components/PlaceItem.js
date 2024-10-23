@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
 
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
@@ -41,11 +41,9 @@ const PlaceItem = props => {
         `${API_BASE.home}${API_BASE.placesRoutes}/${props.id}`,
         "DELETE",
       );
-      props.onDeletePlace(props.id);
-      
-      console.log(`confirmDeleteHandler : ${'/' + auth.userId + '/places'}`);
-      // history.push('/' + auth.userId + '/places');
-    } catch (err) { }
+      props.onDelete(props.id);
+      // props.onDeletePlace(props.id);
+    } catch (err) {}
   };
 
   //
@@ -86,7 +84,8 @@ const PlaceItem = props => {
           </React.Fragment>
         }>
         <p>
-          Do u want to proceed and delete this place? please note.
+          Do you want to proceed and delete this place? Please note that it
+          can't be undone thereafter.
         </p>
       </Modal>
 
@@ -113,15 +112,11 @@ const PlaceItem = props => {
             <Button inverse onClick={openMapHandler}>VIEW ON MAP </Button>
             {/* {auth.isLoggedIn &&  <- 이렇게 하면 A 사용자가 B 사용자의 장소까지 Update 및 Delete 할 수 있게 되므로 */}
             {auth.userId === props.creatorId && (
-              <Button to={`/places/${props.id}`}>
-                Edit
-              </Button>
+              <Button to={`/places/${props.id}`}>Edit</Button>
             )}
             {/* {auth.isLoggedIn && ( */}
             {auth.userId === props.creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                Delete
-              </Button>
+              <Button danger onClick={showDeleteWarningHandler}>DELETE</Button>
             )}
           </div>
         </Card>
