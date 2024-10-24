@@ -1,3 +1,18 @@
+# 1
+## 2
+### 3
+#### 4 
+##### 5
+###### 6
+
+___
+
+```bash
+```
+
+*** 찐하게 ***
+
+
 # APP_Practice_codes
 
 ### Section 소개
@@ -56,8 +71,8 @@ $ npm run start
 하거나 
 
 #### 1-2.
-```json
 package.json 에 해당 스크립트를 추가
+```json
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
