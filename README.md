@@ -7,10 +7,10 @@
 ![alt text](image-1.png)
 
 ### HTTPS를 통한 로그인 인증 과정
-###### 1 설명
+#### 1 설명
 ![alt text](image-2.png)
 
-###### 2 그림
+#### 2 그림
 ![alt text](image-3.png)
 
 ========================================================================================================
@@ -40,18 +40,18 @@ $ npm install --save console-log-level
 $ npm install --save multer
 
 ###  실행 Script
-###### 1-1.
+#### 1-1.
 $ npm run start
 하거나 
 
-###### 1-2.
+#### 1-2.
 package.json 에 해당 스크립트를 추가
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
 
-###### 2.
+#### 2.
 $ npx nodemon app.js
 
 
@@ -70,17 +70,17 @@ $ npm start
 
 
 ### 실행 Script
-### 1.
+#### 1.
 npm install
 
-### 2.
+#### 2.
 Lib 설치 Script
 $ npm init
 $ npm install --save react-router-dom@5 --save-exact
 $ npm install --save react-transition-group
 $ npm install --save axios
 
-### 3.( 옵션 )
+#### 3.( 옵션 )
 Node 버전 에러시, pacakge.json 에
   "scripts": {
     "start_origin": "react-scripts start",
@@ -91,6 +91,6 @@ Node 버전 에러시, pacakge.json 에
   },
 추가 및 수정
 
-### 4.
+#### 4.
 $ npm start
 
