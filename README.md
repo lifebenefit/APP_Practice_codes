@@ -3,19 +3,22 @@
 ### Section 소개
 ![alt text](image.png)
 
+
 ### 기존 WEB의 인증방식
 ![alt text](image-1.png)
+
 
 ### HTTPS를 통한 로그인 인증 과정
 #### 1 설명
 ![alt text](image-2.png)
 
+
 #### 2 그림
 ![alt text](image-3.png)
 
----
-***
+
 ___
+
 
 ### 섹션 12: 인증 추가 하기
 
@@ -24,7 +27,9 @@ ___
   + mongoose (mongoDB) , (cloud Server DB : Atlas)
     + https://cloud.mongodb.com/v2#/org/66fcba7d069a4d43c73cf7af/projects
 
-========================================================================================================
+
+___
+
 
 #### 
 # BackEnd
@@ -64,7 +69,9 @@ package.json 에 해당 스크립트를 추가
 $ npx nodemon app.js
 ```
 
-========================================================================================================
+
+___
+
 
 #### 
 # FrontEnd
@@ -111,3 +118,6 @@ Node 버전 에러시, pacakge.json 에
 ```bash
 $ npm start
 ```
+
+
+___
