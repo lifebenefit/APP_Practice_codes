@@ -22,7 +22,7 @@ ___
 ![alt text](image-1.png)
 
 
-### ( Token을 이용한 방식 )HTTPS를 포함한 JWT 사용 과정
+### ( Token을 이용한 방식 ) HTTPS를 포함한 JWT 사용 과정
 #### 1 설명
 ![alt text](image-2.png)
 
@@ -60,6 +60,8 @@ $ npm install --save mongoose
 $ npm install --save mongoose-unique-validation
 $ npm install --save console-log-level
 $ npm install --save multer
+$ npm install --save bcryptjs
+$ npm install --save jsonwebtoken
 ```
 
 ###  실행 Script

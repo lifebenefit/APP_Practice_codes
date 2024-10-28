@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
     "console-log-level": "^1.4.1",
     "express": "^4.21.0",
     "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.0",
     "mongoose-unique-validation": "^0.1.0",
     "multer": "^1.4.5-lts.1",

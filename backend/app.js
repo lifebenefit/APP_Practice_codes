@@ -61,10 +61,9 @@ app.use((error, req, res, next) => {
   if (res.headerSent) {  //응답과 연결된 헤더가 이미 전송된 상태인지 확인하는 프러파티 이다.
     return next(error);
   }
-  log.error("Error code : 500 ");
   res.status(error.code || 500) // if(error.code) { return error.code} else { return 500 }
   // 500 : 서버 측 에러 (코드의 버그, 서버 설정 문제, 데이터베이스 연결 오류 등 다양한 이유로 발생)
-  res.json({ message: error.message || 'An unknown error occurred!' });
+  res.json({ message: error.message || '예상하지 못한 에러 발생' });
 });
 
 
