@@ -5,12 +5,11 @@
 ##### 5
 ###### 6
 
-___
-
 ```bash
+echo "aa"
 ```
-
 *** 찐하게 ***
+___
 
 
 # APP_Practice_codes
@@ -23,7 +22,7 @@ ___
 ![alt text](image-1.png)
 
 
-### HTTPS를 통한 로그인 인증 과정
+### ( Token을 이용한 방식 )HTTPS를 포함한 JWT 사용 과정
 #### 1 설명
 ![alt text](image-2.png)
 
