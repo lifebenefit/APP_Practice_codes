@@ -2,7 +2,9 @@ const express = require("express");
 const { check } = require('express-validator');
 
 const placesControllers = require('../controllers/places-controllers');
+
 const fileUpload = require("../middleware/file-upload");
+const checkAuth = require("../middleware/check-auth");
 
 const { API_PLACES } = require('../config');
 
@@ -14,15 +16,22 @@ router.get(API_PLACES.pid, placesControllers.getPlaceById);
 
 router.get(API_PLACES.userUid, placesControllers.getPlacesByUserId);
 
+/** 유효한 Token 인지 확인하는 Middle Ware 단계
+ *  유효한 토큰이 아닐 시, 밑에 라우팅들을 제한함
+ */
+router.use(checkAuth);
+
 router.post(
   API_PLACES.root,
-  fileUpload.single('image'),
-  [
+  fileUpload.single('image'),  // 이미지 파일을 저장에 실패하든 성공하든 next를 호출 시켜준다
+  [  // 각각의 함수를 호출하며 next를 호출한다
     check('title').not().isEmpty(),
     check('description').isLength({ min: 5 }),
     check('address').not().isEmpty()
   ],
-  placesControllers.createPlace
+  placesControllers.createPlace /* API 핸들러 << 
+  일반적으로 미들웨어 체인의 마지막에 위치하며, 
+  res.send(), res.json(), res.render() 등을 사용하여 응답을 보냄 */
 );
 
 router.patch(

@@ -82,7 +82,8 @@ const Auth = () => {
         );
         console.log(responseData);
         // auth.userId = responseData.user.id;
-        auth.login(responseData.user.id); // useState를 쓰기위함
+        // auth.login(responseData.user.id); // useState를 쓰기위함
+        auth.login(responseData.userId, responseData.token);
 
       } catch (err) { }
       /** image data 가 없는 JSON 타입일떄 */
@@ -122,7 +123,8 @@ const Auth = () => {
         );
         console.log(responseData);
         // auth.userId = responseData.user.id;
-        auth.login(responseData.user.id); // useState를 쓰기위함
+        // auth.login(responseData.user.id); // useState를 쓰기위함
+        auth.login(responseData.userId, responseData.token);
       } catch (err) { }
     }
   };

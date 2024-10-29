@@ -44,6 +44,7 @@ export const useHttpClient = () => {
         }
       } catch (error) {
         setError(error.message);
+        setIsLoading(false);
         throw error;
       } finally {
         setIsLoading(false);

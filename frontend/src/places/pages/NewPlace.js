@@ -72,8 +72,9 @@ const NewPlace = () => {
       await sendRequest(
         `${API_BASE.home}${API_BASE.placesRoutes}${API_PLACES.root}`,
         "POST",
-        formData
-      )
+        formData,
+        { Authorization: "Bearer" + " " + auth.token }
+      );
       // await sendRequest('http://localhost:5000/api/places', 'POST', formData);
       history.push('/');
     } catch (err) { }

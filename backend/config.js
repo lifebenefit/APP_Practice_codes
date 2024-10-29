@@ -1,3 +1,5 @@
+const TOKEN_PRIVATE_KEY = "supersecret_dont_share";
+
 const DB_INFO = Object.freeze({
   userId      : "liam",
   password    : '24hkH6ZRESDkhNnM',
@@ -24,4 +26,4 @@ const API_USERS = Object.freeze({
   login : `/login`,
 });
 
-module.exports = { DB_INFO, API_BASE, API_PLACES, API_USERS };
+module.exports = { DB_INFO, API_BASE, API_PLACES, API_USERS, TOKEN_PRIVATE_KEY };

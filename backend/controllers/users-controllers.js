@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const log = require('../util/logger');
+const { TOKEN_PRIVATE_KEY } = require("../config");
 
-const PRIVATE_KEY = "supersecret_dont_share";
 const getUsers = async (req, res, next) => {
   // const users = User.find({}, 'email name')
   let users;
@@ -55,8 +55,11 @@ const signup = async (req, res, next) => {
   }
 
   /** 가입하려는 password 암호화 */
+  let hashedPassword
   try {
-    const hashedPassword = await bcrypt.hash(password, 12);
+    log.notice(`password : ${password}`);
+    hashedPassword = await bcrypt.hash(password, 12);
+    log.notice(hashedPassword);
   } catch (err) {
     return next(new HttpError(
       '비밀번호 생성 에러 [ 서버 에러 : 암호화 에러 ]', 500
@@ -86,7 +89,7 @@ const signup = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
-      PRIVATE_KEY,
+      TOKEN_PRIVATE_KEY,
       { expiresIn: '1h' }
     );
   } catch (err) {
@@ -99,7 +102,11 @@ const signup = async (req, res, next) => {
   // res.status(201).json({ user: createdUser.toObject({ getters: true }) });
   res
     .status(201)
-    .json({ userId: createdUser.id, email: createdUser.email, token: token });
+    .json({ 
+      userId: createdUser.id, 
+      email: createdUser.email, 
+      token: token 
+    });
 };
 
 const login = async (req, res, next) => {
@@ -146,7 +153,7 @@ const login = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      PRIVATE_KEY,
+      TOKEN_PRIVATE_KEY,
       { expiresIn: '1h' }
     );
   } catch (err) {
