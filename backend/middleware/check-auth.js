@@ -1,20 +1,21 @@
 const jwt = require('jsonwebtoken')
 const HttpError = require("../models/http-error");
 const { TOKEN_PRIVATE_KEY } = require("../config");
+const { checkProps, log } = require("../util/codeHelperUtils");
+
 
 module.exports = (req, res, next) => {
-  log.notice(req);
   if (req.method === 'OPTIONS'){
     return next();
   }
   try{
-    log.debug(req.headers);
+    checkProps(req.headers, [ 'authorization' ])
     const token = req.headers.authorization.split(' ')[1]; 
     // Authorization: 'Bearer TOKEN' <- [0] = Bearer , [1] = TOKEN
     // headers 는 대소문자 구분 X , Author === author
 
     if(!token){
-      return ( new HttpError(
+      return next( new HttpError(
         "Authentication filed! [ TOKEN 정보 없음 ]", 401)
       );
     }
@@ -24,8 +25,8 @@ module.exports = (req, res, next) => {
     next();
 
   } catch (err){
-    return ( new HttpError(
-      "Authentication filed! [ authorization 프로퍼티 없음 ]", 401)
+    return next( new HttpError(
+      "Authentication filed! [ jwt TOKEN 생성 실패 ]", 403)
     );
   }
 }

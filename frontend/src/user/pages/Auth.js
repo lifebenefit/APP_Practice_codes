@@ -1,4 +1,7 @@
 import React, { useState, useContext } from "react";
+import {
+  VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE
+} from "../../shared/util/validators";
 
 // eslint-disable-next-line
 import axios from 'axios';
@@ -9,11 +12,10 @@ import Button from "../../shared/components/FormElements/Button";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
-import {
-  VALIDATOR_EMAIL, VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE
-} from "../../shared/util/validators";
-import { API_BASE, API_USERS } from "../../config";
+
 import { AuthContext } from "../../shared/context/auth-context";
+import { API_BASE, API_USERS } from "../../config";
+import { checkProps } from "../../shared/util/codeHelperUtils";
 
 import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
@@ -80,10 +82,9 @@ const Auth = () => {
           }),
           { "Content-Type": "application/json" }
         );
-        console.log(responseData);
-        // auth.userId = responseData.user.id;
-        // auth.login(responseData.user.id); // useState를 쓰기위함
+        checkProps(responseData, [ 'userId', 'token' ]);
         auth.login(responseData.userId, responseData.token);
+        // auth.login 함수를 씀으로 setToken, setUserId 값이 갱신됨 -> 리렌더링
 
       } catch (err) { }
       /** image data 가 없는 JSON 타입일떄 */
@@ -121,9 +122,7 @@ const Auth = () => {
           'POST',
           formData
         );
-        console.log(responseData);
-        // auth.userId = responseData.user.id;
-        // auth.login(responseData.user.id); // useState를 쓰기위함
+        checkProps(responseData, [ 'userId', 'token' ]);
         auth.login(responseData.userId, responseData.token);
       } catch (err) { }
     }

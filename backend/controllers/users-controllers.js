@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
 const log = require('../util/logger');
-const { TOKEN_PRIVATE_KEY } = require("../config");
+const { TOKEN_PRIVATE_KEY, HTTP_STATUS_CODE } = require("../config");
 
 const getUsers = async (req, res, next) => {
   // const users = User.find({}, 'email name')
@@ -121,7 +121,7 @@ const login = async (req, res, next) => {
     /** 일치하는 Email이 없는 경우 */
     if (!existingUser) {
       return next(new HttpError(
-        "Email 이 틀립니다.", 401
+        "Email 이 존재하지 않습니다.", 404
       ));
     }
   } catch (err) {
@@ -139,7 +139,7 @@ const login = async (req, res, next) => {
     /** 일치하는 비밀번호가 없는 경우 */
     if (!isValidPassword) {
       return next(new HttpError(
-        "password 가 틀립니다.", 401
+        "password 가 틀립니다.", 403
       ));
     }
   } catch (err) {
@@ -168,7 +168,7 @@ const login = async (req, res, next) => {
   //   user: existingUser.toObject({ getters: true })
   // });
   res.json({
-    useId: existingUser.id,
+    userId: existingUser.id,
     email: existingUser.email,
     token: token
   });

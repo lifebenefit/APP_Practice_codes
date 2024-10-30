@@ -25,7 +25,7 @@ const ImageUpload = props => {
     // console.log(event.target.files);
     // console.log(Object.keys(event.target)); // 이벤트 객체의 프로퍼티 이름들을 배열로 출력
     console.dir(event.target.files);
-    console.dir(event.target); // 이벤트 객체를 트리 구조로 출력
+    // console.dir(event.target); // 이벤트 객체를 트리 구조로 출력
     let pickedFile;
     let fileIsValid = isValid;
     if (event.target.files && event.target.files.length === 1) {

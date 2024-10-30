@@ -14,16 +14,19 @@ import { AuthContext } from './shared/context/auth-context';
 //   return <h1>Let's start!</h1>;
 // }
 const App = () => {
-  const [token, setToken] = useState(false);
+  const [token,  setToken ] = useState(false);
   const [userId, setUserId] = useState(false);
 
   const login = useCallback((userId, token) => {
     setToken(token);
     setUserId(userId);
+    // console.log("token : " + token);
+    // console.log("userId : " + userId);
   }, [])
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
+    // console.log('Logout')
   }, [])
 
   let routes;

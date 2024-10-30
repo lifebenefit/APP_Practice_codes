@@ -9,7 +9,7 @@ const User = require('../models/user');
 // const { default: mongoose } = require('mongoose');
 const error = require('mongoose/lib/error');
 
-const log = require('../util/logger');
+const { checkProps, log } = require("../util/codeHelperUtils");
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;  // {pid : 'p1'}
@@ -67,7 +67,7 @@ const getPlacesByUserId = async (req, res, next) => {
     ));
   }
 
-  log.debug(userWithPlaces.places);
+  // log.debug(userWithPlaces.places);
   res.json({ places: userWithPlaces.places.map(place => place.toObject({ getters: true })) }); // {places} 는 {places:places} 의 축약형
 };
 
@@ -82,7 +82,6 @@ const createPlace = async (req, res, next) => {
   }
 
   const { title, description, address, creator } = req.body;
-  log.notice(title, description, address, creator);
   let coordinates;
   try {
     coordinates = await getCoordsForAddress(address);
@@ -145,26 +144,38 @@ const updatePlace = async (req, res, next) => {
   const { title, description } = req.body;
   const placeId = req.params.pid;
 
-  let updatePlaceDbCommand;
+  /* DB에서 해당 placeId 에 해당하는 값 조회 */
+  let dbPlaceCollectionData;
   try {
-    updatePlaceDbCommand = await Place.findById(placeId);
-    updatePlaceDbCommand.title = title;
-    updatePlaceDbCommand.description = description
+    dbPlaceCollectionData = await Place.findById(placeId);
+    dbPlaceCollectionData.title = title;
+    dbPlaceCollectionData.description = description
   } catch (err) {
     return next(
       new HttpError("something went wrong, could not update place.", 500)
     );
   }
 
+  /* DB 값의 creator 값과 Request온 요청자 userId 비교 ( 같아야함 ) */
+  if (dbPlaceCollectionData.creator.toString() !== req.userData.userId) {
+    const error = new HttpError(
+      '수정 권한 없음 에러 .',
+      401
+    );
+    return next(error);
+  }
+
+  /* 업데이트 된 값 DB 에 저장 */
   try {
-    await updatePlaceDbCommand.save();
+    await dbPlaceCollectionData.save();
   } catch (err) {
     return next(
       new HttpError("something went wrong, could not update place.", 500)
     );
   }
 
-  res.status(200).json({ place: updatePlaceDbCommand.toObject({ getters: true }) });
+  /* Front 에 Response */
+  res.status(200).json({ place: dbPlaceCollectionData.toObject({ getters: true }) });
 };
 
 const deletePlace = async (req, res, next) => {
@@ -233,6 +244,7 @@ const deletePlace = async (req, res, next) => {
   //   creator: new ObjectId('67079f5f69b0c7146e252743'),
   //   __v: 0
   // }
+
   let place;
   try {
     place = await Place.findById(placeId).populate('creator');
@@ -247,8 +259,21 @@ const deletePlace = async (req, res, next) => {
     ));
   }
 
-  // const imagePath = place.image;
+  /** props 검사 */
+  if ( !(checkProps(place, ['creator']) && checkProps(place.creator, ['places', '_id'])) ) {
+    return next(new HttpError("Front Props data 누락 문제", 400))
+  }
 
+  log.warn(place.creator.id)
+  log.warn(place.creator._id)
+  log.warn(place.creator.id.toString())
+  log.warn(place.creator._id.toString())
+
+  if (place.creator._id.toString() !== req.userData.userId){
+    return next( new HttpError("삭제 권한 없음 에러 "),401);
+  }
+
+  /* DB에 있는 place collection 삭제 */
   try {
     // await place.remove();  // 해당 mongoose 에서 사용 되지 않는 구버전 함수
     // await Place.deleteOne({ _id: placeId });  // Place collection에서 _id 가 placeId 인것을 삭제
@@ -267,6 +292,7 @@ const deletePlace = async (req, res, next) => {
     ));
   }
 
+  /* 삭제 로직 완료 후, 파일 삭제 */
   fs.unlink(place.image, err => {
     err ? log.error(`파일 삭제 에러 [${err}]`) : log.debug(`${place.image} 파일 삭제 완료`);
   });

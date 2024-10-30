@@ -50,12 +50,13 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
   if (req.file) {
-    log.notice(`업로딩된 Image info : ${req.file}`);
+    log.notice(`삭제할 Image info : `);
     console.dir(req.file.originalname);
     console.dir(req.file.destination);
     console.dir(req.file.path);
     fs.unlink(req.file.path, err => {
-      log.notice(err);
+      // err && log.error(`unlink error ${err}`); // err이 null이 아니면 출력
+      err ? log.error(`파일 삭제 error ${err}`) : log.info("파일 삭제 완료");
     })
   }
   if (res.headerSent) {  //응답과 연결된 헤더가 이미 전송된 상태인지 확인하는 프러파티 이다.

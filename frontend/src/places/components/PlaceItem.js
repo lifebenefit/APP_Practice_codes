@@ -40,6 +40,8 @@ const PlaceItem = props => {
       await sendRequest(
         `${API_BASE.home}${API_BASE.placesRoutes}/${props.id}`,
         "DELETE",
+        null,
+        { Authorization : `Bearer: ${auth.token}`}
       );
       props.onDelete(props.id);
       // props.onDeletePlace(props.id);
@@ -48,7 +50,7 @@ const PlaceItem = props => {
 
   //
   // if (isLoading) {
-  //   return (
+//   return (
   //     <div className="center">
   //       <LoadingSpinner />
   //     </div>
