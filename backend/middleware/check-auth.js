@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
 
     if(!token){
       return next( new HttpError(
-        "Authentication filed! [ TOKEN 정보 없음 ]", 401)
+        "Authentication filed! [ TOKEN 정보 없음 ]", 400)
       );
     }
 

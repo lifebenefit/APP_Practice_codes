@@ -53,15 +53,22 @@ const HTTP_STATUS_CODE = Object.freeze({
 예시: 로그인하지 않은 사용자가 보호된 페이지에 접근하려고 할 때. ( 토큰이 아예 없거나 올바르지 않음 )
 예시: 로그인후, 만료된 토큰을 가지고 접근하려는 경우 ( 만료된 토큰 )
 예시: 올바르지 않은 API 키(json파일이라도)로 요청한 경우 ( API 요청 시 잘못된 API 키 )
+예시: DB에 값이 있으나 정보가 틀릴 때
 
 403 Forbidden: 서버가 요청을 이해했지만, 권한 문제로 인해 요청을 거부할 때 사용됩니다.
 예시: A사용자가 B사용자의 정보를 수정 하려고 할 때 ( 토큰자체는 올바르나 접근 권한이 없음 )
+예시: 일반 사용자가 관리자권한으로 접근 하려 할 때 ( 토큰자체는 올바르나 접근 권한이 없음 )
 
 404 Not Found: 클라이언트가 요청한 리소스를 서버에서 찾을 수 없을 때 사용됩니다.
 예시: 존재하지 않는 페이지 URL을 입력했을 때.
+예시: DB상에 아예 값이 존재 하지 않을 때
 
 405 Method Not Allowed: 요청한 HTTP 메서드가 서버에서 지원되지 않을 때 사용됩니다.
 예시: GET 요청만 허용하는 API에 POST 요청을 보냈을 때.
+
+422 Unprocessable Entity: 서버가 요청을 이해하고 요청의 문법도 올바르지만, 요청된 지시를 따를 수 없을 때
+예시: 회원 가입을 하려는데 이미 있는 Email 일때
+예시: Validation 검사에 실패 할 때 
 
 == 500번대: 서버 오류 ==
 500 Internal Server Error: 서버에서 요청을 처리하는 도중에 예기치 않은 오류가 발생했을 때 사용됩니다.
@@ -78,7 +85,7 @@ const HTTP_STATUS_CODE = Object.freeze({
 
 504 Gateway Timeout: 서버가 게이트웨이 또는 프록시 역할을 할 때, 상위 서버로부터 응답을 받는 데 시간이 초과되었을 때 사용됩니다.
 예시: 프록시 서버가 상위 서버로부터 응답을 받지 못해 시간이 초과되었을 때.
-*/
+ */
 
 
 module.exports = { DB_INFO, API_BASE, API_PLACES, API_USERS, TOKEN_PRIVATE_KEY, HTTP_STATUS_CODE };
