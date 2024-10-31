@@ -115,6 +115,7 @@ $ npm init
 $ npm install --save react-router-dom@5 --save-exact
 $ npm install --save react-transition-group
 $ npm install --save axios
+$ npm install --save jwt-decode
 ```
 
 #### 3.( 옵션 )

@@ -87,10 +87,11 @@ const signup = async (req, res, next) => {
   /** JWT 토큰 발행 */
   let token;
   try {
+    const oneHour = 1000 * 60 * 60;
     token = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
       TOKEN_PRIVATE_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: oneHour }
     );
   } catch (err) {
     return next(new HttpError(
@@ -151,10 +152,11 @@ const login = async (req, res, next) => {
   /** JWT 토큰 발행 */
   let token;
   try {
+    const oneHour = 1000 * 60 * 60;
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
       TOKEN_PRIVATE_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: oneHour }
     );
   } catch (err) {
     return next(new HttpError(

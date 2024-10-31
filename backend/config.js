@@ -89,3 +89,78 @@ const HTTP_STATUS_CODE = Object.freeze({
 
 
 module.exports = { DB_INFO, API_BASE, API_PLACES, API_USERS, TOKEN_PRIVATE_KEY, HTTP_STATUS_CODE };
+
+
+
+
+
+
+/*
+public enum ErrorDefinition {
+  LOGIN_FAILED(-10001,"ap.com.msg.login.error"),
+  LOGIN__REQUIRED(-10002,"ap.com.msg.login.required"),
+  LOGIN_5TIMES(-10003,"ap.com.msg.login.password.5times"),
+  LOGIN_LOCK(-10004,"ap.com.msg.login.lock.error"),
+  TOKEN_ACCESS_EXPIRED(-10005,"ap.com.msg.token.access.expired"),
+  TOKEN_REFRESH_EXPIRED(-10006,"ap.com.msg.token.refresh.expired"),
+  TOKEN_INVALID(-10007,"ap.com.msg.token.invalid"),
+  TOKEN_IP_ERROR(-10008,"ap.com.msg.token.ip.error"),
+  UNAUTHORIZED_ERROR(-10009,"ap.cmm.msg.unauthorized.error"),
+  VALIDATION_ERROR(-10010,"ap.cmm.msg.validation.error"),
+  BAD_REQUEST(-10011,"ap.cmm.msg.bad.request.error"),
+  PAGE_ERROR(-10012,"ap.cmm.msg.error.page"),
+  PAGE_ACCESS_DENIED(-10013,"ap.cmm.msg.error.pageAccessDenied"),
+  PAGE_NOT_FOUND(-10014,"ap.cmm.msg.error.pageNotFound"),
+  CREATE_ERROR(-10015,"ap.cmm.msg.create.error"),
+  UPDATE_ERROR(-10016,"ap.cmm.msg.update.error"),
+  DELETE_ERROR(-10017,"ap.cmm.msg.delete.error"),
+  SEARCH_ERROR(-10018,"ap.cmm.msg.search.error"),
+  FILE_DOWNLOAD_ERROR(-10019,"ap.cmm.msg.error.file.download"),
+  FILE_DECRYPT_ERROR(-10020,"ap.cmm.msg.file.decrypt.error"),
+  FILE_UPLOAD_ERROR(-10021,"ap.cmm.msg.file.upload.error"),
+  FILE_NOT_FOUND(-10022,"ap.cmm.msg.file.not.found.error"),
+  FOLDER_EXISTS(-10023,"ap.cmm.msg.folder.exists"),
+  FOLDER_INCHECKFILE(-10024,"ap.cmm.msg.folderInCheckFile"),
+  FOLDER_NOT_FOUND(-10025,"ap.cmm.msg.folder.notFound"),
+  GROUP_AUTHOR_EXIST(-10026,"ap.cmm.msg.groupAuthorExist"),
+  COMPN_PLACE_EXIST(-10027,"ap.cmm.msg.compnPlaceExist"),
+  COMPN_MAPNG_EXIST(-10028,"ap.cmm.msg.compnMapngExist"),
+  SUB_MENU_EXIST(-10029,"ap.cmm.msg.subMenuExist"),
+  SUB_ITEM_EXIST(-10030,"ap.cmm.msg.subItemExist"),
+  SUB_FOLDER_COPY_ERROR(-10031,"ap.cmm.msg.subFolderCopyError"),
+  SUB_FOLDER_MOVE_ERROR(-10032,"ap.cmm.msg.subFolderMoveError"),
+  CMMGROUP_DELETE(-10033,"ap.cmm.msg.userDelete.Check"),
+  CMMGROUP_USERID_CHECK(-10034,"ap.cmm.msg.userIdCheck"),
+  FILE_MOVE_ERROR(-10035,"ap.cmm.msg.move.error"),
+  CHRGE_EXPIRATION(-10036,"ap.com.msg.chrgeExpiration"),
+  PACKET_LIMIT_ERROR(-10037,"ap.com.msg.packetLimitError"),
+  PASSWORD_ERROR(-10038,"ap.cmm.msg.error.editMyInfo.password"),
+  EXCEL_EXT_ERROR(-10039,"ap.cmm.msg.excelExtError"),
+  EXCEL_FORMAT_ERROR(-10040,"ap.cmm.msg.excelFormatError"),
+  EXCEL_UPLOAD_ERROR(-10041,"ap.cmm.msg.excelUploadError"),
+  EXCEL_DOWNLOAD_ERROR(-10042,"ap.cmm.msg.excelDownloadError"),
+  BIMPROCSDVYFGMAPNG_DVYFGPK_CHECK(-10043,"ap.bim.msg.dvyfgPkCheck"),
+  UPPER_SELECT_ERROR(-10044,"ap.cmm.msg.select.selfError"),
+  BIMPROCSRESRCEMAPNG_RESRCEPK_CHECK(-10045,"ap.bim.msg.resrcePkCheck"),
+  GROUP_NAME_REPEATED(-10046,"ap.cmm.msg.groupNameRepeated"),
+  DUPLICATE_ISSUE_NAME(-10047,"ap.cmm.msg.duplicateIssueName"),
+  COMMUNICATION_ERROR(-10048,"ap.cmm.msg.communication.error"),
+  EMAIL_SEND_ERROR(-10049,"ap.com.msg.email.send.fail"),
+  CNTNTS_META_PAGE_NUMBER(-10050,"ap.cmm.msg.cntnts.meta.pageNumber"),
+  DUPLICATE_DATA(-10051,"ap.com.msg.duplicateData"),
+  GROUP_USERID_CHECK_ERROR(-10052,"ap.com.msg.user.notfound.error"),
+  GROUP_USERID_ADD_ERROR(-10053,"ap.com.msg.group.userid.error"),
+  CANNOT_CREATE_TRANSACTION(-10060, "ap.com.msg.cannotCreateTransaction"),
+  LOGIN_DUPLICATE(-10099,"ap.com.msg.login.duplicate.error"),
+
+  RGIST_CREATE_ERROR(-18180, "ap.cmm.msg.file.not.found.error"),
+  CTNULGSTRMAPDATAURL_CREATE_ERROR(-18181, "ap.cmm.msg.file.not.found.error"),
+  LANDUSEPLANMAPDATAURL_CREATE_ERROR(-18182, "ap.cmm.msg.file.not.found.error"),
+  LANDUSEPLANLEGENDINFO_CREATE_ERROR(-18183, "ap.cmm.msg.file.not.found.error"),
+  CLUSTERERGISURL_CREATE_ERROR(-18184, "ap.cmm.msg.file.not.found.error"),
+  REPORT_CREATE_ERROR(-18185, "ap.cmm.msg.file.not.found.error"),
+  CRAWLINFOLIST_SELECT_ERROR(-18186, "ap.cmm.msg.file.not.found.error"),
+  URL_TO_BASE64_ERROR(-20000, "ap.cmm.msg.create.success");
+*/
+
+

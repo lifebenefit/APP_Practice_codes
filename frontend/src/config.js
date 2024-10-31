@@ -78,4 +78,4 @@ const HTTP_STATUS_CODE = Object.freeze({
  */
 
 
-module.exports = { API_BASE, API_PLACES, API_USERS };
+module.exports = { API_BASE, API_PLACES, API_USERS, HTTP_STATUS_CODE };
