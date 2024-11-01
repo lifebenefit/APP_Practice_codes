@@ -89,7 +89,11 @@ const signup = async (req, res, next) => {
   try {
     const oneHour = 1000 * 60 * 60;
     token = jwt.sign(
-      { userId: createdUser.id, email: createdUser.email },
+      {
+        userId: createdUser.id,
+        email: createdUser.email,
+        expireTime: oneHour
+      },
       TOKEN_PRIVATE_KEY,
       { expiresIn: oneHour }
     );
@@ -103,10 +107,10 @@ const signup = async (req, res, next) => {
   // res.status(201).json({ user: createdUser.toObject({ getters: true }) });
   res
     .status(201)
-    .json({ 
-      userId: createdUser.id, 
-      email: createdUser.email, 
-      token: token 
+    .json({
+      userId: createdUser.id,
+      email: createdUser.email,
+      token: token
     });
 };
 
@@ -154,11 +158,16 @@ const login = async (req, res, next) => {
   try {
     const oneHour = 1000 * 60 * 60;
     token = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email },
+      {
+        userId: existingUser.id,
+        email: existingUser.email,
+        expireTime: oneHour
+      },
       TOKEN_PRIVATE_KEY,
       { expiresIn: oneHour }
     );
   } catch (err) {
+    log.error(err);
     return next(new HttpError(
       '토큰 생성 에러 [ 서버 에러 : 토큰 에러 ]', 500
     ));

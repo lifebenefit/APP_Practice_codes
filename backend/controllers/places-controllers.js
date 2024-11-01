@@ -81,7 +81,7 @@ const createPlace = async (req, res, next) => {
     ));
   }
 
-  const { title, description, address, creator } = req.body;
+  const { title, description, address } = req.body;
   let coordinates;
   try {
     coordinates = await getCoordsForAddress(address);
@@ -95,20 +95,20 @@ const createPlace = async (req, res, next) => {
     address,
     location: coordinates,
     image: req.file.path,
-    creator
+    creator : req.userData.userId
   });
 
   /* DB 에 creator 값인 Id 가 있는지 확인 */
   let user;
   try {
-    user = await User.findById(creator);
+    user = await User.findById(req.userData.userId);
     log.info(`${user} <-해당 USER에 DB Place create!-- ${createPlace}`);
     if (!user) {
       return next(new HttpError('creator Id 가 DB 에 존재 하지 않음.'));
     }
   } catch (err) {
     return next(new HttpError(
-      'Creating place failed, please try again', 500
+      'Creating place failed, please try again ...', 500
     ));
   }
 

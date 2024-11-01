@@ -11,25 +11,12 @@ export const useAuth = () => {
   const login = useCallback((userId, token, expirationDate) => {
     setToken(token);
     setUserId(userId);
-    const expiresIn = jwtDecode(token);
-    const aa = expiresIn.exp * 1000;
-    // console.log("token : " + token);
-    // console.log("userId : " + userId);
+    const jwtDecodedData = jwtDecode(token);
+    
     const renewedDate =
-      expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
-    // const renewedDate =
-    //   expirationDate || new Date(new Date().getTime() + Int(token.expiresIn));
+      expirationDate || new Date(new Date().getTime() + jwtDecodedData.expireTime);
     setTokenExpirationDate(renewedDate);
-    console.log("문이루 : " + new Date(new Date().getTime() + 1000 * 60 * 60));
-    console.log("문이루 : " + expirationDate);
-    console.log("문이루 : " + renewedDate);
-    console.log("문이루 : " + renewedDate.toISOString());
-    console.log("토큰 : " + token);
-    console.dir(token);
-    console.dir(expiresIn);
-    console.dir(expiresIn.exp);
-    console.dir(aa);
-    console.dir(new Date(expiresIn.exp * 1000));
+
     localStorage.setItem("userData", JSON.stringify({
       userId,
       token,
