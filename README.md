@@ -4,7 +4,16 @@
 ### Section 소개
 ![alt text](image.png)
 
+### 앱 배포 과정
+![alt text](image-1.png)
 
+### Deployment Preparation Steps
+![alt text](image-2.png)
+
+### Different Way of Deploying MERN Apps
+#### 1 of 2 way
+
+#### 2 of 2 way
 
 ___
 
@@ -15,9 +24,25 @@ ___
   + MVC 패턴 (model–view–controller, MVC)
   + mongoose (mongoDB) , (cloud Server DB : Atlas)
     + https://cloud.mongodb.com/v2#/org/66fcba7d069a4d43c73cf7af/projects
+  + 구글 MAP_API 사용
+    + https://console.cloud.google.com/apis/credentials?hl=ko&project=effective-brook-437306-h0
 
 ___
 
+#### 
+# 프로젝트 배포 방법
+#### 
+
+### 배포판 빌드
+```bash
+npm run build
+```
+
+### 환경변수 설명
+###### .env <- 개발전용
+###### .env.production <- 배포전용
+
+___
 
 #### 
 # BackEnd
