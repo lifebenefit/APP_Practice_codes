@@ -10,6 +10,7 @@
 ![Deployment Preparation Steps 이미지](image-2.png)
 
 ## MERN 앱 배포 방법
+![MERN 앱 배포 방법 이미지](image-3.png)
 
 ### 1. 두 개의 분리된 앱 배포
 - **필요 서버**: 2개
@@ -24,16 +25,15 @@
 
 ___
 
+### 구성
 
-### 섹션
-
-  + NodeJS -- Express -- React
-  + MVC 패턴 (model–view–controller, MVC)
-  + mongoose (mongoDB) , (cloud Server DB : Atlas)
-    + https://cloud.mongodb.com/v2#/org/66fcba7d069a4d43c73cf7af/projects
-  + 구글 MAP_API 사용
-    + https://console.cloud.google.com/apis/credentials?hl=ko&project=effective-brook-437306-h0
-
+- NodeJS -- Express -- React
+- MVC 패턴 (model–view–controller, MVC)
+- mongoose (mongoDB), (cloud Server DB : Atlas)
+  - [MongoDB Atlas](https://cloud.mongodb.com/v2#/org/66fcba7d069a4d43c73cf7af/projects)
+- 구글 MAP_API 사용
+  - [Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ko&project=effective-brook-437306-h0)
+  
 ___
 
 #### 
