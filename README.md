@@ -33,7 +33,10 @@ ___
   - [MongoDB Atlas](https://cloud.mongodb.com/v2#/org/66fcba7d069a4d43c73cf7af/projects)
 - 구글 MAP_API 사용
   - [Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ko&project=effective-brook-437306-h0)
-  
+- FrontEnd 서버
+  - 
+- BackEnd 서버
+  - 
 ___
 
 #### 
