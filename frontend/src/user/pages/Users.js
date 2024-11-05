@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import UsersList from '../components/UsersList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
-import { API_BASE, API_USERS } from "../../config";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
@@ -15,7 +14,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const responseData = await sendRequest(
-          `${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.root}`
+          `${process.env.REACT_APP_BASE}${process.env.REACT_APP_USERS_ROUTE}${process.env.REACT_APP_ROOT}`
         );
 
         setLoadedUsers(responseData.users);

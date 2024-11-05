@@ -28,7 +28,6 @@ async function getCoordsForAddress(address) {
   checkProps(data.results[0].geometry, ["location"]);
   const coordinates = data.results[0].geometry.location;
 
-  log.debug(`좌표값 : ${coordinates}`);
   return coordinates;
 }
 

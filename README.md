@@ -1,19 +1,26 @@
-
 # APP_Practice_codes
 
-### Section 소개
-![alt text](image.png)
+## Section 소개
+![Section 소개 이미지](image.png)
 
-### 앱 배포 과정
-![alt text](image-1.png)
+## 앱 배포 과정
+![앱 배포 과정 이미지](image-1.png)
 
-### Deployment Preparation Steps
-![alt text](image-2.png)
+## Deployment Preparation Steps
+![Deployment Preparation Steps 이미지](image-2.png)
 
-### Different Way of Deploying MERN Apps
-#### 1 of 2 way
+## MERN 앱 배포 방법
 
-#### 2 of 2 way
+### 1. 두 개의 분리된 앱 배포
+- **필요 서버**: 2개
+  - **FrontEnd**: AWS S3, Firebase Hosting 등
+  - **BackEnd**: AWS EC2/EB, Heroku 등
+- **특징**: FrontEnd와 BackEnd 간의 통신을 위해 CORS 헤더가 필요
+
+### 2. 하나의 통합된 앱 배포
+- **필요 서버**: 1개
+  - **사용 서버 예시**: AWS EC2/EB, Heroku 등
+- **특징**: 동일한 도메인에서 동작하므로 CORS 헤더가 필요하지 않음
 
 ___
 
@@ -37,7 +44,7 @@ ___
 ```bash
 npm run build
 ```
-
+ 
 ### 환경변수 설명
 ###### .env <- 개발전용
 ###### .env.production <- 배포전용
@@ -126,3 +133,10 @@ echo "aa"
 ```
 *** 찐하게 ***
 ___
++ 1
+  + 2
+  + 3
+
+- 1
+  - 2
+  - 3

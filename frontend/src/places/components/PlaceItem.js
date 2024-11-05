@@ -9,7 +9,6 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
-import { API_BASE } from "../../config";
 import { AuthContext } from '../../shared/context/auth-context';
 
 import './PlaceItem.css';
@@ -38,7 +37,7 @@ const PlaceItem = props => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        `${API_BASE.home}${API_BASE.placesRoutes}/${props.id}`,
+        `${process.env.REACT_APP_BASE}${process.env.REACT_APP_PLACES_ROUTE}/${props.id}`,
         "DELETE",
         null,
         { Authorization : `Bearer: ${auth.token}`}
@@ -103,7 +102,7 @@ const PlaceItem = props => {
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
-            <img src={`${API_BASE.home}/${props.image}`} alt={props.title} />
+            <img src={`${process.env.REACT_APP_BASE}/${props.image}`} alt={props.title} />
           </div>
           <div className="place-item__info">
             <h2>{props.title}</h2>

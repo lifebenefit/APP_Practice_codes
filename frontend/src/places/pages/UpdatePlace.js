@@ -9,7 +9,6 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 
 import { AuthContext } from '../../shared/context/auth-context';
-import { API_BASE } from "../../config";
 
 import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -42,7 +41,7 @@ const UpdatePlace = () => {
     const fetchPlace = async () => {
       try {
         const responseData = await sendRequest(
-          `${API_BASE.home}${API_BASE.placesRoutes}/${placeId}`
+          `${process.env.REACT_APP_BASE}${process.env.REACT_APP_PLACES_ROUTE}/${placeId}`
         );
         setLoadedPlace(responseData.place);
         setFormData(
@@ -68,7 +67,7 @@ const UpdatePlace = () => {
     event.preventDefault();
     try {
       await sendRequest(
-        `${API_BASE.home}${API_BASE.placesRoutes}/${placeId}`,
+        `${process.env.REACT_APP_BASE}${process.env.REACT_APP_PLACES_ROUTE}/${placeId}`,
         'PATCH',
         JSON.stringify({
           title: formState.inputs.title.value,

@@ -14,7 +14,6 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 
 import { AuthContext } from "../../shared/context/auth-context";
-import { API_BASE, API_USERS } from "../../config";
 import { checkProps } from "../../shared/util/codeHelperUtils";
 
 import { useForm } from "../../shared/hooks/form-hook";
@@ -74,7 +73,7 @@ const Auth = () => {
       // 로그인 모드일 때의 로직
       try {
         const responseData = await sendRequest(
-          `${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.login}`,
+          `${process.env.REACT_APP_BASE}${process.env.REACT_APP_USERS_ROUTE}${process.env.REACT_APP_LOGIN}`,
           'POST',
           JSON.stringify({
             email: formState.inputs.email.value,
@@ -118,7 +117,7 @@ const Auth = () => {
         formData.append('image', formState.inputs.image.value);
 
         const responseData = await sendRequest(
-          `${API_BASE.home}${API_BASE.usersRoutes}${API_USERS.signup}`,
+          `${process.env.REACT_APP_BASE}${process.env.REACT_APP_USERS_ROUTE}${process.env.REACT_APP_SIGNUP}`,
           'POST',
           formData
         );

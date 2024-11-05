@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Avatar from "../../shared/components/UIElements/Avatar";
 import Card from "../../shared/components/UIElements/Card";
-import { API_BASE } from "../../config";
 
 import './UserItem.css';
 
@@ -14,7 +13,7 @@ const UserItem = props => {
       <Card className="user-item__content">
         <Link to={`/${props.id}/places`}>
           <div className="user-item__image">
-            <Avatar image={`${API_BASE.home}/${props.image}`} alt={props.name} />
+            <Avatar image={`${process.env.REACT_APP_BASE}/${props.image}`} alt={props.name} />
             {/* <img src={props.image} alt={props.name} /> */}
           </div>
           <div className="user-item__info">

@@ -102,7 +102,7 @@ const createPlace = async (req, res, next) => {
   let user;
   try {
     user = await User.findById(req.userData.userId);
-    log.info(`${user} <-해당 USER에 DB Place create!-- ${createPlace}`);
+    log.info(`${user.email} <-해당 USER에 DB Place create!-- ${createPlace.title}`);
     if (!user) {
       return next(new HttpError('creator Id 가 DB 에 존재 하지 않음.'));
     }
@@ -263,11 +263,6 @@ const deletePlace = async (req, res, next) => {
   if ( !(checkProps(place, ['creator']) && checkProps(place.creator, ['places', '_id'])) ) {
     return next(new HttpError("Front Props data 누락 문제", 400))
   }
-
-  log.warn(place.creator.id)
-  log.warn(place.creator._id)
-  log.warn(place.creator.id.toString())
-  log.warn(place.creator._id.toString())
 
   if (place.creator._id.toString() !== req.userData.userId){
     return next( new HttpError("삭제 권한 없음 에러 "),401);

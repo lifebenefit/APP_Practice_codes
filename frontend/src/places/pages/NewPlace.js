@@ -11,7 +11,6 @@ import {
   VALIDATOR_REQUIRE
 } from "../../shared/util/validators";
 
-import { API_BASE, API_PLACES } from "../../config";
 import { AuthContext } from "../../shared/context/auth-context";
 
 import { useForm } from "../../shared/hooks/form-hook";
@@ -70,7 +69,7 @@ const NewPlace = () => {
       formData.append('image', formState.inputs.image.value);
 
       await sendRequest(
-        `${API_BASE.home}${API_BASE.placesRoutes}${API_PLACES.root}`,
+        `${process.env.REACT_APP_BASE}${process.env.REACT_APP_PLACES_ROUTE}${process.env.REACT_APP_ROOT}`,
         "POST",
         formData,
         { Authorization: `Bearer ${auth.token}` },

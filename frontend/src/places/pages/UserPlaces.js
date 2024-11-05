@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import PlaceList from "../components/PlaceList";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-import { API_BASE } from "../../config";
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
@@ -52,7 +51,7 @@ const UserPlaces = () => {
     const fetchPlaces = async () => {
       try{
         const responseData = await sendRequest(
-          `${API_BASE.home}${API_BASE.placesRoutes}/user/${userId}`
+          `${process.env.REACT_APP_BASE}${process.env.REACT_APP_PLACES_ROUTE}/user/${userId}`
         );
         setLoadedPlaces(responseData.places);
       }catch(err) { }

@@ -1,21 +1,3 @@
-const API_BASE = Object.freeze({
-  home: "http://localhost:5000",
-  placesRoutes: "/api/places",
-  usersRoutes: "/api/users"
-});
-
-const API_PLACES = Object.freeze({
-  root : `/`,
-  pid : `/:pid`,
-  userUid : `/user/:uid`,
-});
-
-const API_USERS = Object.freeze({
-  root : `/`,
-  signup : `/signup`,
-  login : `/login`,
-});
-
 const HTTP_STATUS_CODE = Object.freeze({
   // 400번대: 클라이언트 오류
   badRequest: 400, // 잘못된 요청 형식이나 누락된 데이터
@@ -78,4 +60,4 @@ const HTTP_STATUS_CODE = Object.freeze({
  */
 
 
-module.exports = { API_BASE, API_PLACES, API_USERS, HTTP_STATUS_CODE };
+module.exports = { HTTP_STATUS_CODE };

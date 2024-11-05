@@ -15,7 +15,7 @@ const app = express();
 // app.use(bodyParser.json());        // Json Data 전용 : JSON 형식 ( ex) {"name": "John", "age": 30} )
 app.use(bodyParser.json());
 
-app.use('/uploads/images', express.static(path.join('uploads', 'images')));
+app.use(process.env.API_UPLOAD_IMAGES, express.static(path.join('uploads', 'images')));
 // uploads/images 라는 경로에 있는 파일들을 반환가능하게 함
 
 app.use((req, res, next) => {
@@ -34,6 +34,7 @@ app.use((req, res, next) => {
   // 다음 미들웨어 함수로 제어를 전달합니다.
   next();
 });
+
 app.use(process.env.API_PLACES_ROUTER, placesRoutes);  // /api/places/...   인 경우만 Routing 하도록 지정
 app.use(process.env.API_USERS_ROUTER, usersRoutes);
 
@@ -74,10 +75,10 @@ log.debug(url);
 mongoose
   .connect(url)
   .then(() => {
-    log.info("Connected to DB");
-    app.listen(process.env.DB_PORT_NUMBER);
+    log.info(`Connected to DB, port : ${process.env.DB_PORT_NUMBER}`);
+    app.listen(Number(process.env.DB_PORT_NUMBER));
   })
   .catch(error => {
     log.error("Connection Error");
-    log.error(err);
+    log.error(error);
   });
