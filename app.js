@@ -75,7 +75,7 @@ log.debug(url);
 mongoose
   .connect(url)
   .then(() => {
-    log.info(`Connected to DB, port : ${process.env.DB_PORT_NUMBER}`);
+    log.info(`Connected to DB, port : ${process.env.PORT || process.env.DB_PORT_NUMBER}`);
     app.listen(Number(process.env.PORT || process.env.DB_PORT_NUMBER));
   })
   .catch(error => {
