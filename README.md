@@ -84,64 +84,34 @@ package.json 에 해당 스크립트를 추가
 
 ___
 
+####
+# heroku 사용 Command
+####
 
-#### 
-# FrontEnd
-#### 
-
-###  초기 프로젝트 생성 과정
-Project는 "create-react-app" 를 통해서 만들어짐
-https://github.com/facebook/create-react-app
+- **Github Connect 하고 Automatic Deploys 이용 한다는 가정**
 ```bash
-$ npm init react-app my-app
-$ cd my-app
-$ npm start
+$ heroku login
+$ heroku restart --app backend-server-wonhyuk1994
+$ heroku ps:scale web=0 --app backend-server-wonhyuk1994
+$ heroku logs --tail --app backend-server-wonhyuk1994
+$ heroku info -a backend-server-wonhyuk1994
 ```
-
-### 실행 Script
-#### 1.
-```bash
-$ npm install
-```
-
-#### 2.
-Lib 설치 Script
-```bash
-
-```
-
-#### 3.( 옵션 )
-Node 버전 에러시, pacakge.json 에
-```json
-
-```
-추가 및 수정
-
-#### 4.
-```bash
-
-```
-
-
-___
-
-
-# 1
-## 2
-### 3
-#### 4 
-##### 5
-###### 6
 
 ```bash
-echo "aa"
+# 뭐든 로그인 후 CLI 이용
+$ heroku login
+# Dyno 끄기
+$ heroku ps:scale web=0 --app backend-server-wonhyuk1994
+# Dyno 켜기
+$ heroku ps:scale web=1 --app backend-server-wonhyuk1994
+# 재시작
+$ heroku restart --app backend-server-wonhyuk1994
+# 애플리케이션 상태 확인
+$ heroku ps --app backend-server-wonhyuk1994
+# 각종 정보 확인
+$ heroku info -a backend-server-wonhyuk1994
+# 서버 로그 확인
+$ heroku logs --tail --app backend-server-wonhyuk1994
+# 환경 변수 설정
+$ heroku config:set KEY=VALUE --app backend-server-wonhyuk1994
 ```
-*** 찐하게 ***
-___
-+ 1
-  + 2
-  + 3
-
-- 1
-  - 2
-  - 3
