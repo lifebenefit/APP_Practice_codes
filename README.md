@@ -47,40 +47,28 @@ ___
 
 ### 배포판 빌드
 ```bash
-npm run build
+# npm run build 시, .env.production 환경변수를 참조해 빌드한다.
+$ npm run build
 ```
- 
+
+### Local frontEnd Test
+```bash
+$ npm install -g serve
+$ serve -s build
+```
+### node -v 버전이 12 이하인 경우 최신버전 설치
+```bash
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+$ source ~/.bashrc
+$ nvm --version
+$ nvm install --lts
+$ nvm use --lts
+$ node -v
+```
+
 ### 환경변수 설명
 ###### .env <- 개발전용
 ###### .env.production <- 배포전용
-
-___
-
-#### 
-# BackEnd
-#### 
-### Lib 설치 Script
-```bash
-
-```
-
-###  실행 Script
-#### 1-1.
-```bash
-
-```
-
-#### 1-2.
-package.json 에 해당 스크립트를 추가
-```json
-
-```
-
-#### 2.
-```bash
-
-```
-
 
 ___
 
