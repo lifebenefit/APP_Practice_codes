@@ -51,8 +51,7 @@ npm run build
 ```
  
 ### 환경변수 설명
-###### .env <- 개발전용
-###### .env.production <- 배포전용
+###### heroku site 에서 settings -> config Vars
 
 ___
 
@@ -83,6 +82,12 @@ package.json 에 해당 스크립트를 추가
 
 
 ___
+####
+# heroku install
+####
+```bash
+$ curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+```
 
 ####
 # heroku 사용 Command
