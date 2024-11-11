@@ -28,6 +28,7 @@ const Auth = React.lazy(() => import('./user/pages/Auth'));
 // }
 
 const App = () => {
+  console.log("#Start APP#");
   const { userId, token, login, logout } = useAuth();
 
   let routes;
