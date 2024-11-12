@@ -34,11 +34,11 @@ ___
 - 구글 MAP_API 사용
   - [Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ko&project=effective-brook-437306-h0)
 - FrontEnd 서버
-  - heroku
-    - [heroku] https://dashboard.heroku.com/apps/backend-server-wonhyuk1994
+  - aws s3
+    - [awsS3] https://eu-north-1.console.aws.amazon.com/console/home?region=eu-north-1#
 - BackEnd 서버
-  - firebase
-    - [firebase] 
+  - heroku
+    - [heroku] https://dashboard.heroku.com/
 ___
 
 #### 
