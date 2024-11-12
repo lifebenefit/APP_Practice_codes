@@ -38,7 +38,7 @@ ___
     - [awsS3] https://eu-north-1.console.aws.amazon.com/console/home?region=eu-north-1#
 - BackEnd 서버
   - heroku
-    - [heroku] https://dashboard.heroku.com/apps/backend-server-wonhyuk1994
+    - [heroku] https://dashboard.heroku.com/
 ___
 
 #### 
