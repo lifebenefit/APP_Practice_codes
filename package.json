@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://www.cocabot.net",
+  "homepage": "https://app.cocabot.com",
   "private": true,
   "dependencies": {
     "axios": "^1.7.7",
