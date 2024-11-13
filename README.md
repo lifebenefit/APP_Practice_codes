@@ -43,12 +43,36 @@ ___
 ___
 
 #### 
-# BackEnd( JavaScript, NodeJS, ExpressJS ) 배포판 빌드
+# BackEnd( JavaScript, NodeJS, ExpressJS ) 배포
 #### 
 
 ### 환경변수 설명
   - `.nodemoon` [개발전용]
   - `heroku 로그인 -> Settings -> Config Vars -> Reveal Config Vars` [배포전용]
+
+### Library 설치
+```bash
+$ npm i
+```
+package.json 참조
+```json
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "console-log-level": "^1.4.1",
+    "express": "^4.21.0",
+    "express-validator": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0",
+    "mongoose-unique-validation": "^0.1.0",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+```
 
 ### BackEnd code 배포판 빌드
 ```bash
